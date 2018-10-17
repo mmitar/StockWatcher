@@ -1,0 +1,171 @@
+package data;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.List;
+
+import javax.ejb.Local;
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
+import javax.enterprise.inject.Alternative;
+
+import beans.Stock;
+import util.DatabaseException;
+
+/**
+ * Contracted with StockDataInterface. Calls the IOT to collect API data
+ * @author Matthew & Joey
+ *
+ */
+@Stateless
+@Local(StockDataInterface.class)
+@LocalBean
+@Alternative
+public class StockDataService implements StockDataInterface<Stock> {
+
+	Connection conn = null;
+	String url = "jdbc:mysql://localhost:3306/swatcherdb";
+	String username = "root";
+	String password = "root";
+	
+	@Override
+	public List<Stock> findAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Stock findById(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Stock findBy(Stock stock) {
+		
+		try {
+			conn = DriverManager.getConnection(url, username, password);
+			String sql = "SELECT * FROM `stock` WHERE `SYMBOL` = '" + stock.getSymbol() + "'";
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(sql);
+			
+			if(rs.next()){
+				stock = Stock.getOneResultSet(rs); // Stock Found
+			}else {
+				stock = null; // No stock was found
+			}
+			
+			rs.close();
+			stmt.close();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+			// TODO: throw new DatabaseException(e);
+		}finally {
+			{
+				//Cleanup Database
+				if(conn != null) 
+				{
+					try {
+					conn.close();
+					} catch (SQLException e)
+					{
+						e.printStackTrace();			
+						// TODO: throw new DatabaseException(e);
+					}
+				}
+			}
+		}
+		return stock;
+	}
+
+	@Override
+	public boolean create(Stock stock) 
+	{
+		boolean result = false;
+		
+		try {
+			conn = DriverManager.getConnection(url, username, password);
+			
+			String sql = "INSERT INTO `stock` ("+Stock.getParamSet()+") VALUES ("+Stock.getValueSet(stock)+")";
+			System.out.println(sql);
+			
+			Statement stmt = conn.createStatement();
+			int rs = stmt.executeUpdate(sql);
+			
+			if(rs > 0) {
+				result = true; 
+			}
+			
+			stmt.close();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+			// TODO: throw new DatabaseException(e);
+		}finally {
+			{
+				//Cleanup Database
+				if(conn != null) 
+				{
+					try {
+					conn.close();
+					} catch (SQLException e)
+					{
+						e.printStackTrace();			
+						// TODO: throw new DatabaseException(e);
+					}
+				}
+			}
+		}
+		return result;
+	}
+
+	@Override
+	public boolean update(Stock stock) {
+		
+		boolean result = false;
+		
+		try {
+			conn = DriverManager.getConnection(url, username, password);
+			
+			String sql = "UPDATE `stock` SET "+Stock.getUpdateSetBySymbol(stock);
+			
+			Statement stmt = conn.createStatement();
+			int rs = stmt.executeUpdate(sql);
+			
+			if(rs > 0) {
+				result = true; 
+			}
+			
+			stmt.close();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+			throw new DatabaseException(e);
+		}finally {
+			{
+				//Cleanup Database
+				if(conn != null) 
+				{
+					try {
+					conn.close();
+					} catch (SQLException e)
+					{
+						e.printStackTrace();			
+						throw new DatabaseException(e);
+					}
+				}
+			}
+		}
+		return result;
+	}
+
+	@Override
+	public boolean delete(Stock t) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+}

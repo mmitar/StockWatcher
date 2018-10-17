@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+	<h:head>
+	<title>HomePage</title>
+</h:head>
+
+<body>
+	<div align="center">
+		<h1>HomePage</h1>
+		
+		<br />
+		Welcome #{user.username}! You have successfully been logged in.
+		<br />
+		<br/>
+		<h:form>
+			<h:commandButton value="Call API data from IOT" action="#{stockController.getStockIOT()}"/> <br/> <br/>
+			<br/>
+			<br/>
+			<h:button value="Logout" outcome="LoginPage.xhtml" />
+		</h:form>
+		
+	</div>
+</body>
+</html>

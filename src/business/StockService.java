@@ -5,9 +5,11 @@ import javax.ejb.Local;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.enterprise.inject.Alternative;
+import javax.inject.Inject;
 
 import beans.Stock;
-import data.StockDataInterface;
+import data.DataAccessInterface;
+
 
 @Stateless
 @Local(StockInterface.class)
@@ -18,22 +20,22 @@ public class StockService implements StockInterface {
 	/**
 	 * @return StockDataService methods
 	 */
-	@SuppressWarnings("rawtypes")
-	@EJB
-	StockDataInterface dao;
+	
+	@Inject
+	DataAccessInterface<Stock> dao;
 	
 	/**
 	 * calls consumeStockIOT through SDI service
 	 * @return Stock
 	 */
-	@SuppressWarnings("unchecked")
+	
 	@Override
 	public boolean updateIEX_Previous(Stock stock) {
 		
 		if(dao.findBy(stock) == null)
 		{
 			if(dao.create(stock) == true) {
-				return false;
+				return true;
 			}
 			else {
 				return false;
@@ -54,4 +56,6 @@ public class StockService implements StockInterface {
 		
 		return stock;
 	}
+	
 }
+

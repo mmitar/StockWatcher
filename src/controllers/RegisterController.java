@@ -1,9 +1,12 @@
 package controllers;
 
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+
 import beans.User;
+import business.UserInterface;
 
 /**
  * Moderates register modules within the app. No DB is currently implemented.
@@ -13,17 +16,32 @@ import beans.User;
 @ManagedBean
 @ViewScoped
 public class RegisterController {
-
 	/**
 	 * Registers the User Model and navigates them to the Success page
 	 * 
 	 * @param user: User
 	 * @return view: String
 	 */
-	public String onSubmit(User user)
+	
+	@Inject
+	UserInterface service;
+	
+	public UserInterface getService() {
+		return service;
+	}
+	
+		public String onSubmit(User user)
 	{	
+		user = service.findBy(user);		
+		
 		//Forwards the User ManagedBean
 		FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("user",user);
-		return "RegistrationSuccess.xhtml"; //return view
+		
+		if(user == null)
+		{
+			return "RegistrationPage.xhtml";
+		}
+		
+		return "RegistrationSuccess.xhtml"; // return view
 	}
 }

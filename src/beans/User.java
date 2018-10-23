@@ -14,21 +14,23 @@ import javax.validation.constraints.Size;
 @ViewScoped
 public class User {
 	
+	private int ID;
+	
 	@NotNull(message="Firstname is required")
 	@Size(max=30, message="First Name cannot be longer than 30 characters.")
-	String firstName;
+	private String firstName;
 	
 	@NotNull(message="Lastname is required")
 	@Size(max=30, message="Last Name cannot be longer than 30 characters.")
-	String lastName;
+	private String lastName;
 	
 	@NotNull(message="Username is required")
 	@Size(min=2, max=30, message="Username must be between 2 and 30 characters.")
-	String username;
+	private String username;
 	
 	@NotNull(message="Password is required")
 	@Size(min=2, max=30, message="Password must be between 2 and 30 characters.")
-	String password;
+	private String password;
 	
 	public User()
 	{
@@ -38,13 +40,24 @@ public class User {
 		password = "";
 	}
 	
-	public User(String firstName, String lastName, String username, String password)
+	public User(int ID, String firstName, String lastName, String username, String password)
 	{
+		this.ID = ID;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.username = username;
 		this.password = password;
 	}
+	
+	
+	public int getID() {
+		return ID;
+	}
+
+	public void setID(int iD) {
+		ID = iD;
+	}
+
 	public String getFirstName() {
 		return firstName;
 	}
@@ -69,5 +82,13 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+	@Override
+	public String toString() {
+		return "User [ID=" + ID + ", firstName=" + firstName + ", lastName=" + lastName + ", username=" + username
+				+ ", password=" + password + "]";
+	}
+	
+	
 
 }

@@ -4,6 +4,7 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 
 import beans.Stock;
 import business.StockInterface;
@@ -20,7 +21,7 @@ public class StockController {
 	/**
 	 * @return StockService methods
 	 */
-	@EJB
+	@Inject
 	StockInterface service;
 	
 	/**

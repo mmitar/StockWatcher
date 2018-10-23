@@ -13,6 +13,7 @@ import javax.ejb.Stateless;
 import javax.enterprise.inject.Alternative;
 
 import beans.Stock;
+import beans.User;
 import util.DatabaseException;
 
 /**
@@ -21,10 +22,10 @@ import util.DatabaseException;
  *
  */
 @Stateless
-@Local(StockDataInterface.class)
+@Local(DataAccessInterface.class)
 @LocalBean
 @Alternative
-public class StockDataService implements StockDataInterface<Stock> {
+public class StockDataService implements DataAccessInterface<Stock> {
 
 	Connection conn = null;
 	String url = "jdbc:mysql://localhost:3306/swatcherdb";
@@ -167,5 +168,11 @@ public class StockDataService implements StockDataInterface<Stock> {
 	public boolean delete(Stock t) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public Stock findBy(String string) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

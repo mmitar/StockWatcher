@@ -19,7 +19,6 @@ import business.UserService;
 @ManagedBean
 @ViewScoped
 public class LoginController {
-
 	/**
 	 * Valides the User Model and navigates them to the homePage if successful.
 	 * 

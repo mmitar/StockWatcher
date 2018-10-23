@@ -28,12 +28,12 @@ public class UserService implements UserInterface  {
 
 	public boolean create(User user)
 	{	
-		if(dao.create(user) == false)
+		if(dao.create(user) == true)
 		{
-			return false;
+			return true;
 		}
 		
-		return true;
+		return false;
 		
 	}
 	

@@ -13,7 +13,6 @@ import javax.ejb.Stateless;
 import javax.enterprise.inject.Alternative;
 
 import beans.Stock;
-import beans.User;
 import util.DatabaseException;
 
 /**

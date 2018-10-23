@@ -109,7 +109,7 @@ public class UserDataService implements DataAccessInterface<User> {
         		}       		
         	}       	
         }
-		return true;
+		return false;
     }
 		
 	@Override

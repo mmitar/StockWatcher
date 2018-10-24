@@ -32,14 +32,15 @@ public class RegisterController {
 		return service;
 	}
 	
-		public String onSubmit(User user)
+			
+	public String onSubmit(User user)
 	{	
-		user = service.findBy(user);		
+		boolean usr = service.create(user);		
 		
 		//Forwards the User ManagedBean
 		FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("user",user);
 		
-		if(user == null)
+		if(usr == false)
 		{
 			return "RegistrationPage.xhtml";
 		}

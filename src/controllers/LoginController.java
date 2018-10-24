@@ -42,8 +42,10 @@ public class LoginController {
 		
 		if(user == null)
 		{
+			System.out.println(user + "NULL_____ FROM LOGIN CONTROLLER");
 			return "LoginPage.xhtml";
 		}
+		System.out.println(user + "FROM LOGIN CONTROLLER");
 		
 		return "HomePage.xhtml"; // return view
 	}

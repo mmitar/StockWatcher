@@ -45,9 +45,10 @@ public class UserDataService implements DataAccessInterface<User> {
 			{
 				rs.next();
 				user = new User(rs.getInt("ID"),rs.getString("firstName"),rs.getString("lastName"),rs.getString("userName"),rs.getString("password"));
-				rs.close();
-				stmt.close();	
+				System.out.println("------------------>" + user);
 			}	
+			rs.close();
+			stmt.close();
 		}catch(SQLException e)        
     	{
         	e.printStackTrace();
@@ -68,6 +69,7 @@ public class UserDataService implements DataAccessInterface<User> {
         		}       		
         	}       	
         }
+		System.out.print(user + "NO USER????");
 		return user;
     }	
 	@Override

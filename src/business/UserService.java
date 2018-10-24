@@ -22,8 +22,13 @@ public class UserService implements UserInterface  {
 	{ 
 		// Step 1: Get and return the user that logged in
         user = dao.findBy(user);
+        if(user!=null)
+        {
+        	System.out.println(user + " USER NOT NULL FROM USER SERVICE");
+        	return user;
+        }
         
-        return user;
+        return null;
     }
 
 	public boolean create(User user)

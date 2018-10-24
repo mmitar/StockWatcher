@@ -44,9 +44,19 @@ public class StockService implements StockInterface {
 	}
 
 	@Override
-	public Stock getStock(Stock stock) {
-		// TODO Auto-generated method stub
-		return null;
+	public Stock getStock(String symbol) {
+		
+		Stock stock = dao.findBy(symbol);
+		
+		if(stock== null)
+		{
+			return null;			
+		}
+		else
+		{
+			return stock;	
+		}
+		
 	}
 	
 }

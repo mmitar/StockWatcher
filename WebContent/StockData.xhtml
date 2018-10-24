@@ -4,6 +4,25 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html">
 
-	<ui:composition template="">
-	</ui:composition>
+	<h:head>
+	<title>HomePage</title>
+</h:head>
+
+<body>
+	<div align="center">
+		<h1>Stock Data</h1>
+		
+		<br />
+		High for this stock: #{stock.high}
+		Low for this stock: #{stock.low}
+		<br />
+		<br/>
+		<h:form>
+			<br/>
+			<br/>
+			<h:button value="Logout" outcome="LoginPage.xhtml" /> <h:button value="Home page" outcome="HomePage.xhtml" />
+		</h:form>
+		
+	</div>
+</body>
 </html>

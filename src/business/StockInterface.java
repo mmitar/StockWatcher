@@ -12,7 +12,7 @@ public interface StockInterface {
 	 * Calls the IOT to consume Json API from IEX
 	 * @return Stock
 	 */	
-	public Stock getStock(Stock stock);
+	public Stock getStock(String symbol);
 	
 	public boolean updateIEX_Previous(Stock stock);
 

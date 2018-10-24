@@ -13,11 +13,12 @@
 		<h1>HomePage</h1>
 		
 		<br />
-		Welcome #{user.username}! You have successfully been logged in.
+		Welcome #{user.firstName}! You have successfully been logged in.
 		<br />
 		<br/>
 		<h:form>
-			<h:commandButton value="Call API data from IOT" action="#{stockController.getStockIOT()}"/> <br/> <br/>
+		Stock Symbol: <h:inputText id="symbol" maxlength="15" required="true" /> <br/><h:message for="symbol" style="color:red"/> <br />
+			<h:commandButton value="View Stock Data" action="#{stockController.onSubmit(symbol)}"/> <br/> <br/>
 			<br/>
 			<br/>
 			<h:button value="Logout" outcome="LoginPage.xhtml" />

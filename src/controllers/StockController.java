@@ -6,6 +6,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import beans.Stock;
+import beans.User;
 import business.StockInterface;
 
 /**
@@ -37,16 +38,23 @@ public class StockController {
 	 *  
 	 * @return View
 	 */
-	public String getStockIOT()
-	{
-		System.out.println("StockController.getIOT(): Invoked.");
+	public String onSubmit(String symbol)
+	{	
 		
-		Stock stock = service.getPrevious();
+		Stock stock = service.getStock(symbol);
+		//Forwards the User ManagedBean
+		FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("stock", stock);
 		
-		FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("stock",stock);
+		if(stock !=null)
+		{
+			return "StockData.xhtml"; 
+		}
+		else
+		{
+			return "HomePage.xhtml"; // return view
+		}
+	
 		
-		System.out.println("StockController.getIOT(): Returning View.");
-		return "HomePage.xhtml"; //return view
 	}
 	
 }

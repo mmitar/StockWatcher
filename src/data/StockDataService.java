@@ -42,17 +42,21 @@ public class StockDataService implements DataAccessInterface<Stock> {
 	}
 
 	@Override
-	public Stock findBy(Stock stock) {
+	public Stock findBy(String symbol) {
 		
+		Stock stock = null;
 		try {
 			conn = DriverManager.getConnection(url, username, password);
-			String sql = "SELECT * FROM `stock` WHERE `SYMBOL` = '" + stock.getSymbol() + "'";
+			String sql = "SELECT * FROM `stock` WHERE `SYMBOL` = '%s' LIMIT 1", symbol();
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery(sql);
-			
+			System.out.println(rs.next()+ "BEFORE LOOP_____ STOCKDATASERVICE");
+			System.out.println(sql);
 			if(rs.next()){
+				System.out.println(rs.next()+ "IN IF LOOP_____ STOCKDATASERVICE");
 				stock = Stock.getOneResultSet(rs); // Stock Found
 			}else {
+				System.out.println(rs.next()+ "NULL STOCK_____ STOCKDATASERVICE");
 				stock = null; // No stock was found
 			}
 			
@@ -79,7 +83,7 @@ public class StockDataService implements DataAccessInterface<Stock> {
 		}
 		return stock;
 	}
-
+	
 	@Override
 	public boolean create(Stock stock) 
 	{
@@ -169,8 +173,9 @@ public class StockDataService implements DataAccessInterface<Stock> {
 	}
 
 	@Override
-	public Stock findBy(String string) {
+	public Stock findBy(Stock t) {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 }

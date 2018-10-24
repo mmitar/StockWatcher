@@ -2,6 +2,7 @@ package controllers;
 
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
@@ -13,6 +14,7 @@ import business.UserInterface;
  * @author Matthew & Joey
  *
  */
+
 @ManagedBean
 @ViewScoped
 public class RegisterController {
@@ -23,7 +25,7 @@ public class RegisterController {
 	 * @return view: String
 	 */
 	
-	@Inject
+	@EJB
 	UserInterface service;
 	
 	public UserInterface getService() {

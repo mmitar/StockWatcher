@@ -10,11 +10,9 @@ import javax.inject.Inject;
 import beans.Stock;
 import data.DataAccessInterface;
 
-
 @Stateless
 @Local(StockInterface.class)
 @LocalBean
-@Alternative
 public class StockService implements StockInterface {
 
 	/**
@@ -23,7 +21,6 @@ public class StockService implements StockInterface {
 	
 	@Inject
 	DataAccessInterface<Stock> dao;
-	
 	/**
 	 * calls consumeStockIOT through SDI service
 	 * @return Stock
@@ -32,16 +29,7 @@ public class StockService implements StockInterface {
 	@Override
 	public boolean updateIEX_Previous(Stock stock) {
 		
-		if(dao.findBy(stock) == null)
-		{
-			if(dao.create(stock) == true) {
-				return true;
-			}
-			else {
-				return false;
-			}
-		}
-		else if(dao.update(stock)) {
+		if(dao.create(stock) == true) {
 			return true;
 		}
 		

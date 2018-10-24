@@ -1,6 +1,7 @@
 package controllers;
 
 
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
@@ -26,7 +27,7 @@ public class LoginController {
 	 * @param user
 	 * @return
 	 */	
-	@Inject
+	@EJB
 	UserInterface service;
 	
 	public UserInterface getService() {

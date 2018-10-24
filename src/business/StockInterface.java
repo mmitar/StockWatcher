@@ -1,7 +1,5 @@
 package business;
 
-import javax.ejb.Local;
-
 import beans.Stock;
 
 /**
@@ -9,7 +7,6 @@ import beans.Stock;
  * @author Matthew & Joey
  *
  */
-@Local
 public interface StockInterface {
 	
 	/**

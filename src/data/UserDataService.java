@@ -19,14 +19,12 @@ import util.DatabaseException;
 @Stateless
 @Local(DataAccessInterface.class)
 @LocalBean
-@Alternative
 public class UserDataService implements DataAccessInterface<User> {
 	
 	Connection conn = null;
 	String url = "jdbc:mysql://localhost:3306/swatcherdb";
 	String username = "root";
 	String password = "root";
-	
 	
 	@Override
 	public List<User> findAll() {

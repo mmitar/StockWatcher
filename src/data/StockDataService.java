@@ -24,13 +24,12 @@ import util.DatabaseException;
 @Stateless
 @Local(DataAccessInterface.class)
 @LocalBean
-@Alternative
 public class StockDataService implements DataAccessInterface<Stock> {
 
-	Connection conn = null;
-	String url = "jdbc:mysql://localhost:3306/swatcherdb";
-	String username = "root";
-	String password = "root";
+	private static Connection conn = null;
+	private final String url = "jdbc:mysql://localhost:3306/swatcherdb";
+	private final String username = "root";
+	private final String password = "root";
 	
 	@Override
 	public List<Stock> findAll() {

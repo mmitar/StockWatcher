@@ -16,7 +16,6 @@ import business.StockService;
  * @author Matthew & Joey
  *
  */
-@Local
 public interface DataAccessInterface <T> 
 {
 		public List<T> findAll();

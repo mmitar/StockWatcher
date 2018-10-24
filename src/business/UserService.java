@@ -1,5 +1,6 @@
 package business;
 
+import javax.ejb.EJB;
 import javax.ejb.Local;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -12,7 +13,6 @@ import data.DataAccessInterface;
 @Stateless
 @Local(UserInterface.class)
 @LocalBean
-@Alternative
 public class UserService implements UserInterface  {
 	
 	@Inject

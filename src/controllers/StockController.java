@@ -8,6 +8,7 @@ import javax.inject.Inject;
 
 import beans.Stock;
 import business.StockInterface;
+import data.StockDataService;
 
 /**
  * Handles Stock model requests. Injects Stock service layer.
@@ -21,7 +22,7 @@ public class StockController {
 	/**
 	 * @return StockService methods
 	 */
-	@Inject
+	@EJB
 	StockInterface service;
 	
 	/**

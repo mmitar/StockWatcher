@@ -44,6 +44,12 @@ public class StockService implements StockInterface {
 		
 		return stock;
 	}
+
+	@Override
+	public Stock getStock(Stock stock) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }
 

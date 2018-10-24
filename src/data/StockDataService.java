@@ -97,11 +97,12 @@ public class StockDataService implements DataAccessInterface<Stock> {
 			
 			if(rs > 0) {
 				result = true; 
-			}
-			
+			}			
 			stmt.close();
 			
-		}catch(SQLException e) {
+		}catch(SQLException e)
+		
+		{
 			e.printStackTrace();
 			// TODO: throw new DatabaseException(e);
 		}finally {

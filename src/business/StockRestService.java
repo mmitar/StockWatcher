@@ -24,7 +24,7 @@ public class StockRestService {
 	@Path("/previous")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response getIEX_Previous(Stock stock) {
+	public Response getStock(Stock stock) {
 		
 		boolean result = service.updateIEX_Previous(stock);
 		

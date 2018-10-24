@@ -47,16 +47,17 @@ public class StockDataService implements DataAccessInterface<Stock> {
 		Stock stock = null;
 		try {
 			conn = DriverManager.getConnection(url, username, password);
-			String sql = "SELECT * FROM `stock` WHERE `SYMBOL` = '%s' LIMIT 1", symbol();
+			String sql = String.format("SELECT * FROM `stock` WHERE `SYMBOL` = '%s' LIMIT 1", symbol);
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery(sql);
-			System.out.println(rs.next()+ "BEFORE LOOP_____ STOCKDATASERVICE");
+			
 			System.out.println(sql);
-			if(rs.next()){
-				System.out.println(rs.next()+ "IN IF LOOP_____ STOCKDATASERVICE");
+			if(rs.next())
+			{
 				stock = Stock.getOneResultSet(rs); // Stock Found
-			}else {
-				System.out.println(rs.next()+ "NULL STOCK_____ STOCKDATASERVICE");
+			}
+			else 
+			{
 				stock = null; // No stock was found
 			}
 			

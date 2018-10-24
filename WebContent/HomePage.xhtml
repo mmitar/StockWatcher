@@ -16,9 +16,9 @@
 		Welcome #{user.firstName}! You have successfully been logged in.
 		<br />
 		<br/>
-		<h:form>
-		Stock Symbol: <h:inputText id="symbol" maxlength="15" required="true" /> <br/><h:message for="symbol" style="color:red"/> <br />
-			<h:commandButton value="View Stock Data" action="#{stockController.onSubmit(symbol)}"/> <br/> <br/>
+		<h:form id="symbolForm">
+		Stock Symbol: <h:inputText id="symbol" name="symbol" maxlength="15" required="true" /> <br/><h:message for="symbol" style="color:red"/> <br />
+			<h:commandButton value="View Stock Data" action="#{stockController.onSubmit()}"/> <br/> <br/>
 			<br/>
 			<br/>
 			<h:button value="Logout" outcome="LoginPage.xhtml" />

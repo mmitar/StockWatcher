@@ -10,9 +10,7 @@ import java.util.List;
 import javax.ejb.Local;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
-import javax.enterprise.inject.Alternative;
 
-import beans.Stock;
 import beans.User;
 import util.DatabaseException;
 
@@ -37,19 +35,24 @@ public class UserDataService implements DataAccessInterface<User> {
 		try
 		{
 			conn = DriverManager.getConnection(url, username, password);
-			String sql = String.format("SELECT * FROM `user` WHERE `userName` ='%s' AND `password` ='%s'", user.getUsername(),user.getPassword());
+			String sql = String.format("SELECT * FROM `user` WHERE `USERNAME` = '%s' AND `PASSWORD` = '%s'", user.getUsername(),user.getPassword());
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery(sql);
-			
-			if(rs.getFetchSize()==1)
+		
+			if(rs.next())
 			{
-				rs.next();
-				user = new User(rs.getInt("ID"),rs.getString("firstName"),rs.getString("lastName"),rs.getString("userName"),rs.getString("password"));
+				user = User.getResultSet(rs);
 				System.out.println("------------------>" + user);
-			}	
+			} 
+			else 
+			{
+				user = null;
+			}
+			
 			rs.close();
 			stmt.close();
-		}catch(SQLException e)        
+		}
+		catch(SQLException e)        
     	{
         	e.printStackTrace();
         	throw new DatabaseException(e);
@@ -72,21 +75,24 @@ public class UserDataService implements DataAccessInterface<User> {
 		System.out.print(user + "NO USER????");
 		return user;
     }	
+	
 	@Override
 	public boolean create(User user) 
 	{
+		boolean result = false;
 		try
 		{
 			conn = DriverManager.getConnection(url, username,password);
-			String sql = String.format("INSERT INTO user(firstName,lastName, userName, password)VALUES('%s','%s','%s','%s')",user.getFirstName(),user.getLastName(),user.getUsername(),user.getPassword());
+			String sql = String.format("INSERT INTO user (`FIRSTNAME`,`LASTNAME`, `USERNAME`, `PASSWORD`)VALUES('%s','%s','%s','%s')",user.getFirstName(),user.getLastName(),user.getUsername(),user.getPassword());
 			
 			Statement stmt = conn.createStatement();
 			int rs = stmt.executeUpdate(sql);
 			
 			if(rs > 0)
 			{
-				return true;
+				result = true;
 			}	
+			
 			stmt.close();
 		
 		}catch(SQLException e)        
@@ -109,7 +115,7 @@ public class UserDataService implements DataAccessInterface<User> {
         		}       		
         	}       	
         }
-		return false;
+		return result;
     }
 		
 	@Override

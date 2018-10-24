@@ -1,10 +1,8 @@
 package business;
 
-import javax.ejb.EJB;
 import javax.ejb.Local;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
-import javax.enterprise.inject.Alternative;
 import javax.inject.Inject;
 
 import beans.Stock;

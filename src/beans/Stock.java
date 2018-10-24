@@ -16,17 +16,17 @@ import javax.faces.bean.ViewScoped;
 @ViewScoped
 public class Stock {
 	
-	String symbol;
-	String date;
-	float open;
-	float high;
-	float low;
-	float close;
-	float volume;
-	float unadjustedVolume;
-	float change;
-	float changePercent;
-	float vwap;
+	private String symbol;
+	private String date;
+	private float open;
+	private float high;
+	private float low;
+	private float close;
+	private float volume;
+	private float unadjustedVolume;
+	private float change;
+	private float changePercent;
+	private float vwap;
 	
 	public Stock(String symbol, String date, float open, float high, float low, float close, float volume, float unadjustedVolume,
 			float change, float changePercent, float vwap) {

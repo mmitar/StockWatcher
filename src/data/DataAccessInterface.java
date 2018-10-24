@@ -2,15 +2,6 @@ package data;
 
 import java.util.List;
 
-import javax.ejb.EJB;
-import javax.ejb.Local;
-import javax.ejb.Stateless;
-
-import beans.Stock;
-import beans.User;
-import business.StockService;
-
-
 /**
  * Contracts StockDataService with implemented methods
  * @author Matthew & Joey

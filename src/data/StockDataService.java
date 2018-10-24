@@ -10,7 +10,6 @@ import java.util.List;
 import javax.ejb.Local;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
-import javax.enterprise.inject.Alternative;
 
 import beans.Stock;
 import util.DatabaseException;

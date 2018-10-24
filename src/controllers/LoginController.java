@@ -5,12 +5,9 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import javax.inject.Inject;
 
 import beans.User;
-import business.StockInterface;
 import business.UserInterface;
-import business.UserService;
 
 /**
  * Validates login modules within the app. No DB is currently implemented.
@@ -45,6 +42,7 @@ public class LoginController {
 			System.out.println(user + "NULL_____ FROM LOGIN CONTROLLER");
 			return "LoginPage.xhtml";
 		}
+		
 		System.out.println(user + "FROM LOGIN CONTROLLER");
 		
 		return "HomePage.xhtml"; // return view

@@ -1,6 +1,5 @@
 package business;
 
-import javax.ejb.Local;
 import beans.User;
 
 public interface UserInterface {

@@ -1,5 +1,8 @@
 package beans;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.validation.constraints.NotNull;
@@ -40,7 +43,21 @@ public class User {
 		password = "";
 	}
 	
-	public User(int ID, String firstName, String lastName, String username, String password)
+	public User(String username, String password) 
+	{
+		this.username = username;
+		this.password = password;
+	}
+	
+	public User(String username, String password, String firstName, String lastName)
+	{
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.username = username;
+		this.password = password;
+	}
+	
+	public User(String username, String password, String firstName, String lastName, int ID)
 	{
 		this.ID = ID;
 		this.firstName = firstName;
@@ -89,6 +106,16 @@ public class User {
 				+ ", password=" + password + "]";
 	}
 	
-	
+	public static User getResultSet(ResultSet rs) throws SQLException
+	{
+		User user = new User(
+				rs.getString("USERNAME"),
+				rs.getString("PASSWORD"),
+				rs.getString("FIRSTNAME"),
+				rs.getString("LASTNAME"),
+				rs.getInt("ID")
+				);
+		return user;
+	}
 
 }

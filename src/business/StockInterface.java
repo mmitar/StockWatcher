@@ -11,10 +11,21 @@ import util.StockNotFoundException;
 public interface StockInterface {
 	
 	/**
-	 * Calls the IOT to consume Json API from IEX
-	 * @return Stock
-	 */	
+	 * Calls the dao to get stock by symbol
+	 * 
+	 * @throws StockNotFoundException
+	 * @param symbol String
+	 * @return stock Stock
+	 */
 	public Stock getStock(String symbol) throws StockNotFoundException;
+	
+	/**
+	 * Calls the IOT to consume Json API from IEX
+	 * 
+	 * @throws StockNotFoundException
+	 * @param stock Stock
+	 * @return boolean
+	 */	
 	public boolean saveStock(Stock stock) throws StockNotFoundException;
 
 }

@@ -21,11 +21,8 @@ public class LoginController {
 	private String error = null;
 	
 	/**
-	 * Valides the User Model and navigates them to the homePage if successful.
-	 * 
-	 * @param user
-	 * @return
-	 */	
+	 * @injects UserService methods
+	 */
 	@EJB
 	private UserInterface service;
 	
@@ -38,8 +35,10 @@ public class LoginController {
 	{	
 		try	
 		{
+			// Call UserService.findBy the User input
 			this.service.findBy(user);
 		}
+		// If User Does not Exist / Error finding User
 		catch(Exception e)
 		{  
 			this.error = "Username or Password is Incorrect.";
@@ -48,6 +47,7 @@ public class LoginController {
 		
 		FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("user", user);
 		
+		// Redirects user if error occured.
 		if(this.redirect != null) {
 			FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("error",this.error);
 			return this.redirect;

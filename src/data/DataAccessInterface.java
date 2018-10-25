@@ -9,13 +9,27 @@ import java.util.List;
  */
 public interface DataAccessInterface <T> 
 {
+		/**
+		 * READ Method
+		 * Login method to find selected user
+		 * 
+		 * @param T
+		 * @return T
+		 */	
+		public T findBy(T t);
+		
+		/**
+		 * CREATE Method
+		 * DAO method to register new user and enter user data in database
+		 * 
+		 * @param T
+		 * @return boolean
+		 */
+		public boolean create(T t);
+		
 		public List<T> findAll();
 		public T findById(int id);
-		//Generate findby using for log in
-		public T findBy(T t);
-		public T findBy(String string);
-		//generate create used for inserting new user
-		public boolean create(T t);
 		public boolean update(T t);
 		public boolean delete(T t);
+		public T findBy(String string);
 }

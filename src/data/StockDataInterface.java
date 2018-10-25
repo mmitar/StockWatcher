@@ -9,12 +9,32 @@ import java.util.List;
  */
 public interface StockDataInterface<T> 
 {
+		/**
+		 * READ crud method that finds the stock data by symbol
+		 * 
+		 * @param symbol String
+		 * @result T
+		 */
+		public T findBy(String symbol);
+		
+		/**
+		 * Constantly collecting more stock data and it is put in database through this method
+		 * 
+		 * @param T
+		 * @return boolean
+		 */	
+		public boolean create(T t);
+		
+		/**
+		 * Updates Stock data by the symbol
+		 * 
+		 * @param T
+		 * @return boolean
+		 */
+		public boolean update(T t);
+		
 		public List<T> findAll();
 		public T findById(int id);
 		public T findBy(T t);
-		//TODO change string value name
-		public T findBy(String string);
-		public boolean create(T t);
-		public boolean update(T t);
 		public boolean delete(T t);
 }

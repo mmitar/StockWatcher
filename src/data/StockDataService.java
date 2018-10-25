@@ -29,24 +29,12 @@ public class StockDataService implements StockDataInterface<Stock> {
 	private final String username = "root";
 	private final String password = "root";
 	
-	@Override
-	public List<Stock> findAll() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Stock findById(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	/**
-	 * Finding stock 
+	 * READ crud method that finds the stock data by symbol
 	 * 
-	 * @param String
-	 * @return Stock
-	 */	
-
+	 * @param symbol String
+	 * @result stock Stock
+	 */
 	@Override
 	public Stock findBy(String symbol) {
 		
@@ -95,13 +83,14 @@ public class StockDataService implements StockDataInterface<Stock> {
 		//returning stock if null or with data
 		return stock;
 	}
+	
 	/**
+	 * CREATE Crud method
 	 * Constantly collecting more stock data and it is put in database through this method
 	 * 
 	 * @param Stock
 	 * @return boolean
 	 */	
-	
 	@Override
 	public boolean create(Stock stock) 
 	{
@@ -152,24 +141,35 @@ public class StockDataService implements StockDataInterface<Stock> {
 		return result;
 	}
 
+	/**
+	 * UPDATE Method
+	 * Updates Stock data by the symbol
+	 * 
+	 * @param stock Stock
+	 * @return result boolean
+	 */
 	@Override
 	public boolean update(Stock stock) {
 		
 		boolean result = false;
 		
 		try {
+			//Creates a connection to the driver
 			conn = DriverManager.getConnection(url, username, password);
-			
+			//SQL query
 			String sql = "UPDATE `stock` SET "+Stock.getUpdateSetBySymbol(stock);
-			
+			//Open a channel
 			Statement stmt = conn.createStatement();
+			 // Execute the query
 			int rs = stmt.executeUpdate(sql);
 			
+			// If result set effected is creater than 1
 			if(rs > 0) 
 			{
-				result = true; 
+				result = true;
 			}
 			
+			// Close the channel
 			stmt.close();
 		}
 		catch(SQLException e) 
@@ -184,11 +184,13 @@ public class StockDataService implements StockDataInterface<Stock> {
 			{
 				try 
 				{
+					//Close the connection
 					conn.close();
-				} 
+				}
+				// If Connection Closing Error
 				catch (SQLException e)
 				{
-					e.printStackTrace();			
+					e.printStackTrace();	
 					throw new DatabaseException(e);
 				}
 			}
@@ -198,13 +200,22 @@ public class StockDataService implements StockDataInterface<Stock> {
 
 	@Override
 	public boolean delete(Stock t) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public Stock findBy(Stock t) {
-		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
+	@Override
+	public List<Stock> findAll() {
+		return null;
+	}
+
+	@Override
+	public Stock findById(int id) {
 		return null;
 	}
 

@@ -22,21 +22,20 @@ public class UserDataService implements DataAccessInterface<User> {
 	/**
 	 * Creating connection to mySQL db 'swatcherdb'
 	 * also using my username and password 
-	 * 
-	 * 
 	 */	
-	
-	Connection conn = null;
-	String url = "jdbc:mysql://localhost:3306/swatcherdb";
-	String username = "root";
-	String password = "root";
+	private static Connection conn = null;
+	private final String url = "jdbc:mysql://localhost:3306/swatcherdb";
+	private final String username = "root";
+	private final String password = "root";
 	
 	@Override
 	public List<User> findAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}	
+	
 	/**
+	 * READ Method
 	 * Login method to find selected user
 	 * 
 	 * @param user
@@ -93,13 +92,14 @@ public class UserDataService implements DataAccessInterface<User> {
 		//return user if its null or has data
 		return user;
     }	
+	
 	/**
+	 * CREATE Method
 	 * DAO method to register new user and enter user data in database
 	 * 
-	 * @param user
-	 * @return Boolean
+	 * @param user User
+	 * @return result Boolean
 	 */	
-	
 	@Override
 	public boolean create(User user) 
 	{
@@ -150,22 +150,18 @@ public class UserDataService implements DataAccessInterface<User> {
 		
 	@Override
 	public boolean update(User t) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 	@Override
 	public boolean delete(User t) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 	@Override
 	public User findById(int id) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	@Override
 	public User findBy(String string) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 }

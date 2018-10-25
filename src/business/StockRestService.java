@@ -16,6 +16,9 @@ import util.StockNotFoundException;
 @Path("/stocks")
 public class StockRestService {
 	
+	/**
+	 * @injects StockService methods
+	 */
 	@EJB
 	StockInterface service;
 	

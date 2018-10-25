@@ -22,7 +22,7 @@ public class StockController {
 	private String error = null;
 	
 	/**
-	 * @return StockService methods
+	 * @injects StockService methods
 	 */
 	@EJB
 	private StockInterface service;
@@ -42,24 +42,26 @@ public class StockController {
         
         try 
         {
-        	//if a stock is found 
+        	// Calls StockService get Stock by Symbol
 			stock = this.service.getStock(symbol);
         }
-        catch(Exception e)// catch if no stock has  been found and redirect them back to the same page
+     // catch if no stock has  been found and redirect them back to the same page
+        catch(Exception e)
         {
-        	
         	this.error = "No stock data found using: "+symbol;
-			this.redirect = "HomePage.xhtml"; // return view
+			this.redirect = "HomePage.xhtml";
 		}
         
 		//Forwards the User ManagedBean
 		FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("stock", stock);
 		
+		// Redirects User if error occrused
 		if(this.redirect != null) {
 			FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("error",this.error);
 			return this.redirect;
 		}
 		
+		//Returns View
 		return "StockData.xhtml"; 
 		
 	}	

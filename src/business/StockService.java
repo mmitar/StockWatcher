@@ -15,16 +15,18 @@ import util.StockNotFoundException;
 public class StockService implements StockInterface {
 
 	/**
-	 * @return StockDataService methods
+	 * @injects StockDataService methods
 	 */
-	
 	@EJB
 	StockDataInterface<Stock> dao;
+
 	/**
-	 * calls consumeStockIOT through SDI service
-	 * @return Stock
-	 */
-	
+	 * Calls the IOT to consume Json API from IEX
+	 * 
+	 * @throws StockNotFoundException
+	 * @param stock Stock
+	 * @return boolean
+	 */	
 	@Override
 	public boolean saveStock(Stock stock) throws StockNotFoundException{
 		
@@ -39,6 +41,13 @@ public class StockService implements StockInterface {
 		
 	}
 
+	/**
+	 * Calls the dao to get stock by symbol
+	 * 
+	 * @throws StockNotFoundException
+	 * @param symbol String
+	 * @return stock Stock
+	 */
 	@Override
 	public Stock getStock(String symbol) throws StockNotFoundException{
 		

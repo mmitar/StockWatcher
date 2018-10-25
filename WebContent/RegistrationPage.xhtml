@@ -2,7 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://java.sun.com/jstl/core">
 
 	<h:head>
 		<title>Register</title>
@@ -20,6 +21,15 @@
 				<h:commandButton value="Submit" action="#{registerController.onSubmit(user)}"/><br /> <br />
 				<h:button value="Back" outcome="LoginPage.xhtml" />
 			</h:form>
+			
+		    <c:if condition="#{error != null}">
+		        <f:facet name="then">
+		            <div style="color: red"><label>#{error}</label></div>
+		        </f:facet>
+		        <f:facet name="else">
+		            <h:outputText value="[null]"/>
+		        </f:facet>
+		    </c:if>
 		</div>
 	</body>
 </html>

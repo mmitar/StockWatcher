@@ -7,8 +7,8 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 
 import beans.Stock;
-import beans.User;
 import business.StockInterface;
+import util.StockNotFoundException;
 
 /**
  * Handles Stock model requests. Injects Stock service layer.
@@ -43,19 +43,19 @@ public class StockController {
 	{	
 		HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
         String symbol = request.getParameter("symbolForm:symbol");
-		System.out.println(symbol);
 		
-		Stock stock = service.getStock(symbol);
-		//Forwards the User ManagedBean
-		FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("stock", stock);
+        try {
 		
-		if(stock !=null)
-		{
+			Stock stock = service.getStock(symbol);
+			
+			//Forwards the User ManagedBean
+			FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("stock", stock);
+		
 			return "StockData.xhtml"; 
-		}
-		else
-		{
+        }
+        catch(StockNotFoundException e)
+        {
 			return "HomePage.xhtml"; // return view
-		}		
+		}
 	}	
 }

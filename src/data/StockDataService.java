@@ -99,28 +99,31 @@ public class StockDataService implements DataAccessInterface<Stock> {
 			Statement stmt = conn.createStatement();
 			int rs = stmt.executeUpdate(sql);
 			
-			if(rs > 0) {
+			if(rs > 0) 
+			{
 				result = true; 
 			}			
 			stmt.close();
 			
-		}catch(SQLException e)
-		
+		}
+		catch(SQLException e)
 		{
 			e.printStackTrace();
 			throw new DatabaseException(e);
-		}finally {
+		}
+		finally 
+		{
+			//Cleanup Database
+			if(conn != null) 
 			{
-				//Cleanup Database
-				if(conn != null) 
+				try 
 				{
-					try {
-					conn.close();
-					} catch (SQLException e)
-					{
-						e.printStackTrace();			
-						throw new DatabaseException(e);
-					}
+				conn.close();
+				} 
+				catch (SQLException e)
+				{
+					e.printStackTrace();			
+					throw new DatabaseException(e);
 				}
 			}
 		}
@@ -140,27 +143,31 @@ public class StockDataService implements DataAccessInterface<Stock> {
 			Statement stmt = conn.createStatement();
 			int rs = stmt.executeUpdate(sql);
 			
-			if(rs > 0) {
+			if(rs > 0) 
+			{
 				result = true; 
 			}
 			
 			stmt.close();
-			
-		}catch(SQLException e) {
+		}
+		catch(SQLException e) 
+		{
 			e.printStackTrace();
 			throw new DatabaseException(e);
-		}finally {
+		}
+		finally 
+		{
+			//Cleanup Database
+			if(conn != null) 
 			{
-				//Cleanup Database
-				if(conn != null) 
+				try 
 				{
-					try {
 					conn.close();
-					} catch (SQLException e)
-					{
-						e.printStackTrace();			
-						throw new DatabaseException(e);
-					}
+				} 
+				catch (SQLException e)
+				{
+					e.printStackTrace();			
+					throw new DatabaseException(e);
 				}
 			}
 		}

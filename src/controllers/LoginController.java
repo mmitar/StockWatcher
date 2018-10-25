@@ -5,12 +5,11 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpServletRequest;
 
 import beans.User;
 import business.UserInterface;
-import util.LoginFailedException;
-import util.RegistrationFailedException;
+import util.AccountFoundException;
+import util.AccountNotFoundException;
 
 /**
  * Validates login modules within the app. No DB is currently implemented.
@@ -38,22 +37,20 @@ public class LoginController {
 	public UserInterface getService() {
 		return service;
 	}
+	
 	//login method
 	public String onSubmit(User user)
 	{	
 		FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("user",user);
-		try
+		try	
 		{
-			user = service.findBy(user);	
-			if(user == null)
-			{
-				System.out.println(user + "NULL_____ FROM LOGIN CONTROLLER");
-				return "LoginPage.xhtml";
-			}
-		}catch(LoginFailedException e)
-		{  
-			System.out.println("======================== Login Failed Excpetion");
+			service.findBy(user);	
+			
+			return "LoginPage.xhtml";
 		}
-		return "HomePage.xhtml"; // return view
+		catch(AccountNotFoundException e)
+		{  
+			return "HomePage.xhtml"; // return view
+		}
 	}	
 }

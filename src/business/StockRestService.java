@@ -7,9 +7,10 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 
+import beans.ResponseDataModel;
 import beans.Stock;
+import util.StockNotFoundException;
 
 @Stateless
 @Path("/stocks")
@@ -22,21 +23,24 @@ public class StockRestService {
 	@Path("/previous")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response getStock(Stock stock) {
+	public ResponseDataModel saveStock_AAPL(Stock stock) {
 		
-		boolean result = service.updateIEX_Previous(stock);
-		
-		int status;
-		String message;
-		
-		if(result == false) {
-			status = 404;
-			message = "Could not retain IEX APPL PREVIOUS";
-		} else {
-			status = 201;
-			message = "IEX APPL PREVIOUS saved to database.";
+		try {
+			service.saveStock(stock);
+			
+			ResponseDataModel dto = new ResponseDataModel(201,"Request Successfully Executed. Stock saved.", null);
+			return dto;
 		}
-		
-		return Response.status(status).entity(message).build();
+		// When Stock cannot be Saved
+		catch(StockNotFoundException e)
+		{
+			ResponseDataModel dto = new ResponseDataModel(401,"We are unable to handle the request. Try again later.", null);
+			return dto;
+		} 
+		catch(Exception e)
+		{
+			ResponseDataModel dto = new ResponseDataModel(501,"Internal System Explosion. Try again later.", null);
+			return dto;
+		}
 	}
 }

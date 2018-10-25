@@ -4,11 +4,11 @@ import javax.faces.context.FacesContext;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.servlet.http.HttpServletRequest;
 
 import beans.User;
 import business.UserInterface;
-import util.RegistrationFailedException;
+import util.AccountErrorException;
+import util.AccountFoundException;
 
 
 /**
@@ -44,14 +44,22 @@ public class RegisterController {
 	{
 		FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("user",user);
 		try {
-			boolean usr = service.create(user);
-			if (usr == false) {
-				return "RegistrationPage.xhtml";
-			}
-		} catch (RegistrationFailedException e) {
-			System.out.println("======================== User not not added to data base");
-		}
+			
+			service.create(user);
 
-		return "RegistrationSuccess.xhtml"; // return view
+			return "RegistrationSuccess.xhtml"; // return view
+			
+		} catch (AccountFoundException e) {
+			
+			String error = "User already exists.";
+			FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("error", error);
+			return "RegistrationPage.xhtml";
+			
+		} catch (AccountErrorException e) {
+			
+			String error = "Error creating new account.";
+			FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("error", error);
+			return "RegistrationPage.xhtml";
+		}
 	}
 }

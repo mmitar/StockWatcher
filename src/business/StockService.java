@@ -7,6 +7,7 @@ import javax.inject.Inject;
 
 import beans.Stock;
 import data.DataAccessInterface;
+import util.StockNotFoundException;
 
 @Stateless
 @Local(StockInterface.class)
@@ -25,39 +26,32 @@ public class StockService implements StockInterface {
 	 */
 	
 	@Override
-	public boolean updateIEX_Previous(Stock stock) {
+	public boolean saveStock(Stock stock) throws StockNotFoundException{
 		
-		if(dao.create(stock) == true) {
-			return true;
-		}
-		
-		return false;
-	}
-
-	@Override
-	public Stock getPrevious() {
-		
-		// TODO: Identify valid findBy parameter
-		Stock stock = dao.findBy("AAPL");
-		
-		return stock;
-	}
-
-	@Override
-	public Stock getStock(String symbol) {
-		
-		Stock stock = dao.findBy(symbol);
-		
-		if(stock== null)
+		if(dao.create(stock) == true)
 		{
-			return null;			
+			return true;
 		}
 		else
 		{
-			return stock;	
+			throw new StockNotFoundException();
 		}
 		
 	}
-	
+
+	@Override
+	public Stock getStock(String symbol) throws StockNotFoundException{
+		
+		Stock stock = dao.findBy(symbol);
+		
+		if(stock == null)
+		{
+			throw new StockNotFoundException();
+		}
+		else
+		{
+			return stock;
+		}
+	}
 }
 

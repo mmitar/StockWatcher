@@ -42,7 +42,6 @@ public class UserDataService implements DataAccessInterface<User> {
 			if(rs.next())
 			{
 				user = User.getResultSet(rs);
-				System.out.println("------------------>" + user);
 			} 
 			else 
 			{
@@ -72,7 +71,6 @@ public class UserDataService implements DataAccessInterface<User> {
         		}       		
         	}       	
         }
-		System.out.print(user + "NO USER????");
 		return user;
     }	
 	
@@ -84,7 +82,6 @@ public class UserDataService implements DataAccessInterface<User> {
 		{
 			conn = DriverManager.getConnection(url, username,password);
 			String sql = String.format("INSERT INTO user (`FIRSTNAME`,`LASTNAME`, `USERNAME`, `PASSWORD`)VALUES('%s','%s','%s','%s')",user.getFirstName(),user.getLastName(),user.getUsername(),user.getPassword());
-			
 			Statement stmt = conn.createStatement();
 			int rs = stmt.executeUpdate(sql);
 			
@@ -94,8 +91,8 @@ public class UserDataService implements DataAccessInterface<User> {
 			}	
 			
 			stmt.close();
-		
-		}catch(SQLException e)        
+		}
+		catch(SQLException e)        
     	{
         	e.printStackTrace();
         	throw new DatabaseException(e);
@@ -138,7 +135,4 @@ public class UserDataService implements DataAccessInterface<User> {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	
-
 }

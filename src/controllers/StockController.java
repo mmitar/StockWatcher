@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import beans.Stock;
 import business.StockInterface;
-import util.StockNotFoundException;
 
 /**
  * Handles Stock model requests. Injects Stock service layer.
@@ -38,7 +37,7 @@ public class StockController {
 		HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
         String symbol = request.getParameter("symbolForm:symbol");
 		
-        Stock stock= null;
+        Stock stock = null;
         
         try 
         {

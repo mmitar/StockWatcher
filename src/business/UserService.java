@@ -7,7 +7,6 @@ import javax.ejb.Stateless;
 
 import beans.User;
 import data.DataAccessInterface;
-import util.UserErrorException;
 import util.UserFoundException;
 import util.UserNotFoundException;
 
@@ -38,16 +37,16 @@ public class UserService implements UserInterface {
 	@Override
 	public boolean create(User user) throws UserFoundException
 	{	
-		user = dao.findBy(user);
-		System.out.println(user);
-		
         if(dao.findBy(user) == null)
-             throw new UserFoundException();
-       
-        if(dao.create(user) == false)
-        	throw new UserErrorException();
-        
-        return true;
+        {
+        	System.out.println("Happy traitsl");
+        	return dao.create(user);
+        }
+        else
+        {
+        	System.out.println("throw this hsit");
+            throw new UserFoundException();
+        }
 	}
 }
 

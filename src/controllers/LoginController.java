@@ -7,7 +7,6 @@ import javax.faces.context.FacesContext;
 
 import beans.User;
 import business.UserInterface;
-import util.UserNotFoundException;
 
 /**
  * Validates login modules within the app. No DB is currently implemented.
@@ -29,7 +28,6 @@ public class LoginController {
 	 */	
 	@EJB
 	private UserInterface service;
-	
 	
 	/**
 	 * 

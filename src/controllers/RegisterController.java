@@ -7,8 +7,6 @@ import javax.faces.bean.ViewScoped;
 
 import beans.User;
 import business.UserInterface;
-import util.UserErrorException;
-import util.UserFoundException;
 
 
 /**

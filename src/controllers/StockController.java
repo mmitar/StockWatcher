@@ -56,9 +56,6 @@ public class StockController {
 		else
 		{
 			return "HomePage.xhtml"; // return view
-		}
-	
-		
-	}
-	
+		}		
+	}	
 }

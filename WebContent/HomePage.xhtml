@@ -8,6 +8,7 @@
 	<title>HomePage</title>
 </h:head>
 
+
 <body>
 	<div align="center">
 		<h1>HomePage</h1>
@@ -15,15 +16,22 @@
 		<br />
 		Welcome #{user.firstName}! You have successfully been logged in.
 		<br />
-		<br/>
-		<h:form id="symbolForm">
-		Stock Symbol: <h:inputText id="symbol" name="symbol" maxlength="15" required="true" /> <br/><h:message for="symbol" style="color:red"/> <br />
-			<h:commandButton value="View Stock Data" action="#{stockController.onSubmit()}"/> <br/> <br/>
-			<br/>
-			<br/>
+
 			<h:button value="Logout" outcome="LoginPage.xhtml" />
-		</h:form>
-		
+	
 	</div>
+
 </body>
+<body>
+	<br/>
+	<div>
+    <a href="https://plot.ly/~joeya127/1/?share_key=F7dICMocutquBTDvB9AXJE"
+     target="_blank" title="Plot 1" style="display: block; text-align: center;"><img
+      src="https://plot.ly/~joeya127/1.png?share_key=F7dICMocutquBTDvB9AXJE" 
+      alt="Plot 1" style="max-width: 100%;width: 600px;"  width="600" 
+      onerror="this.onerror=null;this.src='https://plot.ly/404.png';" /></a>
+    <script data-plotly="joeya127:1" sharekey-plotly="F7dICMocutquBTDvB9AXJE"
+     src="https://plot.ly/embed.js"></script>
+	</div>
+	</body>
 </html>

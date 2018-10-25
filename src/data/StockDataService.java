@@ -66,7 +66,7 @@ public class StockDataService implements DataAccessInterface<Stock> {
 			
 		}catch(SQLException e) {
 			e.printStackTrace();
-			// TODO: throw new DatabaseException(e);
+			throw new DatabaseException(e);
 		}finally {
 			{
 				//Cleanup Database
@@ -77,7 +77,7 @@ public class StockDataService implements DataAccessInterface<Stock> {
 					} catch (SQLException e)
 					{
 						e.printStackTrace();			
-						// TODO: throw new DatabaseException(e);
+						throw new DatabaseException(e);
 					}
 				}
 			}
@@ -108,7 +108,7 @@ public class StockDataService implements DataAccessInterface<Stock> {
 		
 		{
 			e.printStackTrace();
-			// TODO: throw new DatabaseException(e);
+			throw new DatabaseException(e);
 		}finally {
 			{
 				//Cleanup Database
@@ -119,7 +119,7 @@ public class StockDataService implements DataAccessInterface<Stock> {
 					} catch (SQLException e)
 					{
 						e.printStackTrace();			
-						// TODO: throw new DatabaseException(e);
+						throw new DatabaseException(e);
 					}
 				}
 			}

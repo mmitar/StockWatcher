@@ -2,7 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://java.sun.com/jstl/core">
 
 	<h:head>
 		<title>Login Page</title>
@@ -18,6 +19,16 @@
 				
 				Dont have an Account? Register <h:button value="Here" outcome="RegistrationPage.xhtml" />
 			</h:form>
+			
+			<c:if condition="#{error != null}">
+		        <f:facet name="then">
+		            <div style="color: red"><label>#{error}</label></div>
+		        </f:facet>
+		        <f:facet name="else">
+		            <h:outputText value="[null]"/>
+		        </f:facet>
+		    </c:if>
+		    
 		</div>
 	</body>
 </html>

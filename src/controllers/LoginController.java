@@ -1,6 +1,5 @@
 package controllers;
 
-
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -8,7 +7,6 @@ import javax.faces.context.FacesContext;
 
 import beans.User;
 import business.UserInterface;
-import util.AccountFoundException;
 import util.AccountNotFoundException;
 
 /**
@@ -50,6 +48,8 @@ public class LoginController {
 		}
 		catch(AccountNotFoundException e)
 		{  
+			String error = "Username or Password is Incorrect.";
+			FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("error", error);
 			return "HomePage.xhtml"; // return view
 		}
 	}	

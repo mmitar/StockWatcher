@@ -1,12 +1,12 @@
 package business;
 
+import javax.ejb.EJB;
 import javax.ejb.Local;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
-import javax.inject.Inject;
 
 import beans.Stock;
-import data.DataAccessInterface;
+import data.StockDataInterface;
 import util.StockNotFoundException;
 
 @Stateless
@@ -18,8 +18,8 @@ public class StockService implements StockInterface {
 	 * @return StockDataService methods
 	 */
 	
-	@Inject
-	DataAccessInterface<Stock> dao;
+	@EJB
+	StockDataInterface<Stock> dao;
 	/**
 	 * calls consumeStockIOT through SDI service
 	 * @return Stock

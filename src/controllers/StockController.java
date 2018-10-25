@@ -4,7 +4,6 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
 import beans.Stock;
@@ -20,20 +19,14 @@ import util.StockNotFoundException;
 @ViewScoped
 public class StockController {
 	
-	/**
-	 * @return StockService methods
-	 */
-	@Inject
-	StockInterface service;
+	private String redirect = null;
+	private String error = null;
 	
 	/**
-	 * Contracted with StockService to access functions
-	 * 
 	 * @return StockService methods
 	 */
-	public StockInterface getService() {
-		return service;
-	}
+	@EJB
+	private StockInterface service;
 	
 	/**
 	 * Requests the StockService to consume Stock IOT
@@ -45,18 +38,27 @@ public class StockController {
 		HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
         String symbol = request.getParameter("symbolForm:symbol");
 		
-        try {
-		
-			Stock stock = service.getStock(symbol);
-			
-			//Forwards the User ManagedBean
-			FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("stock", stock);
-		
-			return "StockData.xhtml"; 
-        }
-        catch(StockNotFoundException e)
+        Stock stock= null;
+        
+        try 
         {
-			return "HomePage.xhtml"; // return view
+			stock = this.service.getStock(symbol);
+        }
+        catch(Exception e)
+        {
+        	this.error = "No stock data found using: "+symbol;
+			this.redirect = "HomePage.xhtml"; // return view
 		}
+        
+		//Forwards the User ManagedBean
+		FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("stock", stock);
+		
+		if(this.redirect != null) {
+			FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("error",this.error);
+			return this.redirect;
+		}
+		
+		return "StockData.xhtml"; 
+		
 	}	
 }

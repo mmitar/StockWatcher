@@ -9,6 +9,7 @@ import util.StockNotFoundException;
  *
  */
 public interface StockInterface {
+	
 	/**
 	 * Calls the IOT to consume Json API from IEX
 	 * @return Stock

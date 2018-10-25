@@ -4,7 +4,6 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import javax.inject.Inject;
 
 import beans.User;
 import business.UserInterface;
@@ -18,35 +17,44 @@ import util.UserNotFoundException;
 @ManagedBean
 @ViewScoped
 public class LoginController {
+	
+	private String redirect = null;
+	private String error = null;
+	
 	/**
 	 * Valides the User Model and navigates them to the homePage if successful.
 	 * 
 	 * @param user
 	 * @return
 	 */	
-	@Inject
-	UserInterface service;
+	@EJB
+	private UserInterface service;
+	
 	
 	/**
-	 * returning service of UserInterface which was  via @EJB
-	 *  
-	 * @return View
+	 * 
+	 * @param user: User
+	 * @return view: String
 	 */
-	
-	// Login method
 	public String loginUser(User user)
 	{	
 		try	
 		{
-			service.findBy(user);	
-			FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("user", user);
-			return "HomePage.xhtml"; // return view
+			this.service.findBy(user);
 		}
-		catch(UserNotFoundException e)
+		catch(Exception e)
 		{  
-			String error = "Username or Password is Incorrect.";
-			FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("error", error);
-			return "LoginPage.xhtml";
+			this.error = "Username or Password is Incorrect.";
+			this.redirect = "LoginPage.xhtml";
 		}
+		
+		FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("user", user);
+		
+		if(this.redirect != null) {
+			FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("error",this.error);
+			return this.redirect;
+		}
+		
+		return "HomePage.xhtml"; // return view
 	}	
 }

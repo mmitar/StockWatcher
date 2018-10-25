@@ -1,9 +1,9 @@
 package business;
 
+import javax.ejb.EJB;
 import javax.ejb.Local;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
-import javax.inject.Inject;
 
 import beans.User;
 import data.DataAccessInterface;
@@ -16,7 +16,7 @@ import util.UserNotFoundException;
 @LocalBean
 public class UserService implements UserInterface {
 	
-	@Inject
+	@EJB
 	DataAccessInterface<User> dao;
 	
 	@Override
@@ -36,22 +36,18 @@ public class UserService implements UserInterface {
     }
 
 	@Override
-	public boolean create(User user) throws UserFoundException, UserErrorException
+	public boolean create(User user) throws UserFoundException
 	{	
-        if(dao.findBy(user) != null)
-        {
+		user = dao.findBy(user);
+		System.out.println(user);
+		
+        if(dao.findBy(user) == null)
              throw new UserFoundException();
-        }
        
-        if(dao.create(user))
-        {
-            return true;
-        }
-        else 
-        {
-            throw new UserErrorException();
-        }
+        if(dao.create(user) == false)
+        	throw new UserErrorException();
         
+        return true;
 	}
 }
 

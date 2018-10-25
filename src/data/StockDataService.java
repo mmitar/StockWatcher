@@ -20,9 +20,9 @@ import util.DatabaseException;
  *
  */
 @Stateless
-@Local(DataAccessInterface.class)
+@Local(StockDataInterface.class)
 @LocalBean
-public class StockDataService implements DataAccessInterface<Stock> {
+public class StockDataService implements StockDataInterface<Stock> {
 
 	private static Connection conn = null;
 	private final String url = "jdbc:mysql://localhost:3306/swatcherdb";

@@ -1,7 +1,6 @@
 package controllers;
 
 import javax.faces.context.FacesContext;
-import javax.inject.Inject;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -21,44 +20,43 @@ import util.UserFoundException;
 @ManagedBean
 @ViewScoped
 public class RegisterController {
+	
+	private String redirect = null;
+	private String error = null;
+	
 	/**
 	 * Registers the User Model and navigates them to the Success page
 	 * 
 	 * @param user: User
 	 * @return view: String
 	 */
-	
-	@Inject
-	UserInterface service;
-	
-//	public UserInterface getService() {
-//		return service;
-//	}
-	
+	@EJB
+	private UserInterface service;
+
 	/**
 	 * Controller method on Submit in takes a user from user Model and returns a String for registration.
 	 *  
 	 * @return View
 	 */
-	
 	public String registerUser(User user) 
 	{
-		
-		try {
-			service.create(user);
-		} catch (UserFoundException e) {
-			
-			String error = "User already exists.";
-			FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("error", error);
-			return "RegistrationPage.xhtml";
-		} catch (UserErrorException e) {
-			
-			String error = "Error creating new account.";
-			FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("error", error);
-			return "RegistrationPage.xhtml";
+		try 
+		{
+			this.service.create(user);
+		} 
+		catch (Exception e) 
+		{
+			this.redirect = "RegistrationPage.xhtml";
+			this.error = "User Exists.";
 		}
 
 		FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("user",user);
+		
+		if(this.redirect != null) {
+			FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("error",this.error);
+			return this.redirect;
+		}
+		
 		return "RegistrationSuccess.xhtml"; // return view
 	}
 }

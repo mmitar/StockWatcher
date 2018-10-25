@@ -1,12 +1,12 @@
 package business;
 
 import beans.User;
-import util.AccountErrorException;
-import util.AccountFoundException;
-import util.AccountNotFoundException;
+import util.UserErrorException;
+import util.UserFoundException;
+import util.UserNotFoundException;
 
 public interface UserInterface {
 	
-	public User findBy(User user) throws AccountNotFoundException;
-	public boolean create(User user) throws AccountFoundException, AccountErrorException;
+	public User findBy(User user) throws UserNotFoundException;
+	public boolean create(User user) throws UserFoundException, UserErrorException;
 }

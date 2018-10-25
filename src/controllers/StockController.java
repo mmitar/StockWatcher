@@ -4,6 +4,7 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
 import beans.Stock;
@@ -22,7 +23,7 @@ public class StockController {
 	/**
 	 * @return StockService methods
 	 */
-	@EJB
+	@Inject
 	StockInterface service;
 	
 	/**
@@ -39,7 +40,7 @@ public class StockController {
 	 *  
 	 * @return View
 	 */
-	public String onSubmit()
+	public String getStock()
 	{	
 		HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
         String symbol = request.getParameter("symbolForm:symbol");

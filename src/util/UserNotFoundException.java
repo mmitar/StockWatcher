@@ -1,6 +1,6 @@
 package util;
 
-public class AccountFoundException extends RuntimeException
+public class UserNotFoundException extends RuntimeException
 {
 	private static final long serialVersionUID = 0L;
 }

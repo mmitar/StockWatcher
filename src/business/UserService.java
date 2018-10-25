@@ -7,9 +7,9 @@ import javax.inject.Inject;
 
 import beans.User;
 import data.DataAccessInterface;
-import util.AccountErrorException;
-import util.AccountFoundException;
-import util.AccountNotFoundException;
+import util.UserErrorException;
+import util.UserFoundException;
+import util.UserNotFoundException;
 
 @Stateless
 @Local(UserInterface.class)
@@ -20,7 +20,7 @@ public class UserService implements UserInterface {
 	DataAccessInterface<User> dao;
 	
 	@Override
-	public User findBy(User user) throws AccountNotFoundException
+	public User findBy(User user) throws UserNotFoundException
 	{ 
 		// Step 1: Get and return the user that logged in
         user = dao.findBy(user);
@@ -31,16 +31,16 @@ public class UserService implements UserInterface {
         }
         else
         {
-        	throw new AccountNotFoundException();
+        	throw new UserNotFoundException();
         }
     }
 
 	@Override
-	public boolean create(User user) throws AccountFoundException, AccountErrorException
+	public boolean create(User user) throws UserFoundException, UserErrorException
 	{	
         if(dao.findBy(user) != null)
         {
-             throw new AccountFoundException();
+             throw new UserFoundException();
         }
        
         if(dao.create(user))
@@ -49,7 +49,7 @@ public class UserService implements UserInterface {
         }
         else 
         {
-            throw new AccountErrorException();
+            throw new UserErrorException();
         }
         
 	}

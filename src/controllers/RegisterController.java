@@ -1,14 +1,15 @@
 package controllers;
 
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 import beans.User;
 import business.UserInterface;
-import util.AccountErrorException;
-import util.AccountFoundException;
+import util.UserErrorException;
+import util.UserFoundException;
 
 
 /**
@@ -27,12 +28,12 @@ public class RegisterController {
 	 * @return view: String
 	 */
 	
-	@EJB
+	@Inject
 	UserInterface service;
 	
-	public UserInterface getService() {
-		return service;
-	}
+//	public UserInterface getService() {
+//		return service;
+//	}
 	
 	/**
 	 * Controller method on Submit in takes a user from user Model and returns a String for registration.
@@ -40,26 +41,24 @@ public class RegisterController {
 	 * @return View
 	 */
 	
-	public String onSubmit(User user) 
+	public String registerUser(User user) 
 	{
-		FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("user",user);
+		
 		try {
-			
 			service.create(user);
-
-			return "RegistrationSuccess.xhtml"; // return view
-			
-		} catch (AccountFoundException e) {
+		} catch (UserFoundException e) {
 			
 			String error = "User already exists.";
 			FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("error", error);
 			return "RegistrationPage.xhtml";
-			
-		} catch (AccountErrorException e) {
+		} catch (UserErrorException e) {
 			
 			String error = "Error creating new account.";
 			FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("error", error);
 			return "RegistrationPage.xhtml";
 		}
+
+		FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("user",user);
+		return "RegistrationSuccess.xhtml"; // return view
 	}
 }

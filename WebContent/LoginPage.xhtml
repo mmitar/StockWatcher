@@ -15,20 +15,18 @@
 				Username: <h:inputText id="username" value="#{user.username}" title="" maxlength="30" required="true" /> <br/><h:message for="username" style="color:red"/> <br />
 				Password: <h:inputSecret id="password" value="#{user.password}" title="" maxlength="30" required="true" type="password" /> <br/><h:message for="password" style="color:red"/> <br />
 				 <br/>
-				<h:commandButton value="Submit" action="#{loginController.onSubmit(user)}"/><br /> <br />
+				<h:commandButton value="Submit" action="#{loginController.loginUser(user)}"/><br /> <br />
 				
 				Dont have an Account? Register <h:button value="Here" outcome="RegistrationPage.xhtml" />
 			</h:form>
 			
-			<c:if condition="#{error != null}">
-		        <f:facet name="then">
-		            <div style="color: red"><label>#{error}</label></div>
-		        </f:facet>
-		        <f:facet name="else">
-		            <h:outputText value="[null]"/>
-		        </f:facet>
-		    </c:if>
-		    
+			<br/>
+			<br/>
+			<c:choose>
+			  <c:when test="#{not empty error}">
+			      <p>#{error}</p>
+			  </c:when>	
+		  </c:choose>
 		</div>
 	</body>
 </html>

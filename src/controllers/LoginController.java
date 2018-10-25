@@ -4,10 +4,11 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 
 import beans.User;
 import business.UserInterface;
-import util.AccountNotFoundException;
+import util.UserNotFoundException;
 
 /**
  * Validates login modules within the app. No DB is currently implemented.
@@ -23,7 +24,7 @@ public class LoginController {
 	 * @param user
 	 * @return
 	 */	
-	@EJB
+	@Inject
 	UserInterface service;
 	
 	/**
@@ -32,25 +33,20 @@ public class LoginController {
 	 * @return View
 	 */
 	
-	public UserInterface getService() {
-		return service;
-	}
-	
-	//login method
-	public String onSubmit(User user)
+	// Login method
+	public String loginUser(User user)
 	{	
-		FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("user",user);
 		try	
 		{
 			service.findBy(user);	
-			
-			return "LoginPage.xhtml";
+			FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("user", user);
+			return "HomePage.xhtml"; // return view
 		}
-		catch(AccountNotFoundException e)
+		catch(UserNotFoundException e)
 		{  
 			String error = "Username or Password is Incorrect.";
 			FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("error", error);
-			return "HomePage.xhtml"; // return view
+			return "LoginPage.xhtml";
 		}
 	}	
 }

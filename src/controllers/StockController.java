@@ -37,14 +37,17 @@ public class StockController {
 		HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
         String symbol = request.getParameter("symbolForm:symbol");
 		
+        // creating a null instance of stock
         Stock stock = null;
         
         try 
         {
+        	//if a stock is found 
 			stock = this.service.getStock(symbol);
         }
-        catch(Exception e)
+        catch(Exception e)// catch if no stock has  been found and redirect them back to the same page
         {
+        	
         	this.error = "No stock data found using: "+symbol;
 			this.redirect = "HomePage.xhtml"; // return view
 		}

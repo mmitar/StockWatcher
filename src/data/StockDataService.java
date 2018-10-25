@@ -40,22 +40,32 @@ public class StockDataService implements StockDataInterface<Stock> {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	/**
+	 * Finding stock 
+	 * 
+	 * @param String
+	 * @return Stock
+	 */	
 
 	@Override
 	public Stock findBy(String symbol) {
 		
 		Stock stock = null;
 		try {
-			conn = DriverManager.getConnection(url, username, password);
+			conn = DriverManager.getConnection(url, username, password);// creating connection
+			//SELECT FROM SQL statement
 			String sql = String.format("SELECT * FROM `stock` WHERE `SYMBOL` = '%s' LIMIT 1", symbol);
+			//creating connection with statement
 			Statement stmt = conn.createStatement();
+			//execeute statement
 			ResultSet rs = stmt.executeQuery(sql);
 			
-			System.out.println(sql);
+			// if at least one row was selceted then return stock
 			if(rs.next())
 			{
 				stock = Stock.getOneResultSet(rs); // Stock Found
 			}
+			//else return stock as null
 			else 
 			{
 				stock = null; // No stock was found
@@ -82,8 +92,15 @@ public class StockDataService implements StockDataInterface<Stock> {
 				}
 			}
 		}
+		//returning stock if null or with data
 		return stock;
 	}
+	/**
+	 * Constantly collecting more stock data and it is put in database through this method
+	 * 
+	 * @param Stock
+	 * @return boolean
+	 */	
 	
 	@Override
 	public boolean create(Stock stock) 
@@ -91,23 +108,26 @@ public class StockDataService implements StockDataInterface<Stock> {
 		boolean result = false;
 		
 		try {
-			conn = DriverManager.getConnection(url, username, password);
-			
+			conn = DriverManager.getConnection(url, username, password);//conection made
+			//INSERT sql statement
 			String sql = "INSERT INTO `stock` ("+Stock.getParamSet()+") VALUES ("+Stock.getValueSet(stock)+")";
-			System.out.println(sql);
-			
+			//create connection for statement
 			Statement stmt = conn.createStatement();
+			//execute INSERT statement via update
 			int rs = stmt.executeUpdate(sql);
 			
+			//if more than one row has been updated then return true
 			if(rs > 0) 
 			{
 				result = true; 
-			}			
+			}
+			//close connection
 			stmt.close();
 			
 		}
 		catch(SQLException e)
 		{
+			// DB expcetion catch
 			e.printStackTrace();
 			throw new DatabaseException(e);
 		}
@@ -118,6 +138,7 @@ public class StockDataService implements StockDataInterface<Stock> {
 			{
 				try 
 				{
+					//close connection
 				conn.close();
 				} 
 				catch (SQLException e)
@@ -127,6 +148,7 @@ public class StockDataService implements StockDataInterface<Stock> {
 				}
 			}
 		}
+		//return reuslt if null or with data
 		return result;
 	}
 

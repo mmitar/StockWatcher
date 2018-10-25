@@ -19,6 +19,13 @@ import util.DatabaseException;
 @LocalBean
 public class UserDataService implements DataAccessInterface<User> {
 	
+	/**
+	 * Creating connection to mySQL db 'swatcherdb'
+	 * also using my username and password 
+	 * 
+	 * 
+	 */	
+	
 	Connection conn = null;
 	String url = "jdbc:mysql://localhost:3306/swatcherdb";
 	String username = "root";
@@ -29,30 +36,42 @@ public class UserDataService implements DataAccessInterface<User> {
 		// TODO Auto-generated method stub
 		return null;
 	}	
+	/**
+	 * Login method to find selected user
+	 * 
+	 * @param user
+	 * @return User
+	 */	
 	@Override
 	public User findBy(User user) {
 		
 		try
 		{
-			conn = DriverManager.getConnection(url, username, password);
+			conn = DriverManager.getConnection(url, username, password);//creating connection
+			//SELECT sql statement to match user input
 			String sql = String.format("SELECT * FROM `user` WHERE `USERNAME` = '%s' AND `PASSWORD` = '%s'", user.getUsername(),user.getPassword());
+			//connecting SQL statement to db
 			Statement stmt = conn.createStatement();
+			//executing the result of the SQL statetment
 			ResultSet rs = stmt.executeQuery(sql);
 		
+			//if user is found
 			if(rs.next())
 			{
-				user = User.getResultSet(rs);
+				user = User.getResultSet(rs);//return user if found
 			} 
 			else 
 			{
-				user = null;
+				
+				user = null;//if no user is found return null
 			}
-			
+			//close connection to prevent garabe build up
 			rs.close();
 			stmt.close();
 		}
 		catch(SQLException e)        
     	{
+			//if database connection failed or doesnt make connection period
         	e.printStackTrace();
         	throw new DatabaseException(e);
         }
@@ -71,8 +90,15 @@ public class UserDataService implements DataAccessInterface<User> {
         		}       		
         	}       	
         }
+		//return user if its null or has data
 		return user;
     }	
+	/**
+	 * DAO method to register new user and enter user data in database
+	 * 
+	 * @param user
+	 * @return Boolean
+	 */	
 	
 	@Override
 	public boolean create(User user) 
@@ -80,20 +106,25 @@ public class UserDataService implements DataAccessInterface<User> {
 		boolean result = false;
 		try
 		{
-			conn = DriverManager.getConnection(url, username,password);
+			conn = DriverManager.getConnection(url, username,password);//creating connection
+			//INSERT SQL statement
 			String sql = String.format("INSERT INTO user (`FIRSTNAME`,`LASTNAME`, `USERNAME`, `PASSWORD`)VALUES('%s','%s','%s','%s')",user.getFirstName(),user.getLastName(),user.getUsername(),user.getPassword());
+			//running statement to the connected database
 			Statement stmt = conn.createStatement();
+			//executing statement
 			int rs = stmt.executeUpdate(sql);
 			
+			//if more than zero rows were updated then return true 
 			if(rs > 0)
 			{
 				result = true;
 			}	
-			
+			//close connection
 			stmt.close();
 		}
 		catch(SQLException e)        
     	{
+			//DB exception for failed database connection
         	e.printStackTrace();
         	throw new DatabaseException(e);
         }
@@ -103,6 +134,7 @@ public class UserDataService implements DataAccessInterface<User> {
         	{	
         		try
         		{
+        			//if connection was made now close it
         			conn.close();
         		}
         		catch(SQLException e)
@@ -112,6 +144,7 @@ public class UserDataService implements DataAccessInterface<User> {
         		}       		
         	}       	
         }
+		//return result if its false or true
 		return result;
     }
 		

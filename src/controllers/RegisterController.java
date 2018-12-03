@@ -27,7 +27,7 @@ public class RegisterController {
 	 */
 	@EJB
 	private UserInterface service;
-
+	
 	/**
 	 * Controller method on Submit in takes a user from user Model and returns a String for registration.
 	 * 
@@ -45,7 +45,7 @@ public class RegisterController {
 		catch (Exception e) 
 		{
 			this.redirect = "RegistrationPage.xhtml";
-			this.error = "User Exists.";
+			this.error = "User name already exists";
 		}
 
 		FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("user",user);

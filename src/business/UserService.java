@@ -4,6 +4,7 @@ import javax.ejb.EJB;
 import javax.ejb.Local;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+import javax.interceptor.Interceptors;
 
 import beans.User;
 import data.DataAccessInterface;
@@ -13,6 +14,7 @@ import util.UserNotFoundException;
 @Stateless
 @Local(UserInterface.class)
 @LocalBean
+@Interceptors(InterceptorLogging.class)
 public class UserService implements UserInterface {
 	
 	/**
@@ -21,6 +23,7 @@ public class UserService implements UserInterface {
 	@EJB
 	DataAccessInterface<User> dao;
 	
+<<<<<<< HEAD
 	/**
 	 * Calls dao to find the user. if not found throw custom exception
 	 * 
@@ -29,14 +32,23 @@ public class UserService implements UserInterface {
 	 * @return user User
 	 */
 	@Override
+=======
+	
+	@Override	
+>>>>>>> testbranch
 	public User findBy(User user) throws UserNotFoundException
 	{ 
 		// Step 1: Get and return the user that logged in
         user = dao.findBy(user);
+<<<<<<< HEAD
         
         // If user is not Null return user
+=======
+          
+>>>>>>> testbranch
         if(user != null)
         {
+        	
         	return user;
         }
         // throw exception is user isn't found

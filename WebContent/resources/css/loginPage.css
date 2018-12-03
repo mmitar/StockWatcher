@@ -1,0 +1,101 @@
+/* Bordered form */
+.form{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+	
+	
+}
+
+background{
+	background-image:url('../images/bg-01.jpg');
+	 filter: blur(8px);
+  -webkit-filter: blur(8px);
+}
+body{
+	background-image:url('../images/bg-01.jpg');
+	background-repeat: no-repeat;
+  	background-size: cover;
+  	display: flex;
+  	flex-direction: column;
+  	justify-content: center; /* With column: centers vertically */
+  	align-items: center;     /* with column: centers horizontally */
+  	padding: 10px;
+}
+
+
+.flex-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #CCCCCC;
+  font-size: 15px;
+  border: 1px solid white;
+  border-radius: 5px;
+  padding: 10px;
+  
+
+}
+
+.form input{
+	
+}
+
+/* Full-width inputs */
+.input[type=text], .input[type=password] {
+    width: 45%;
+    padding: 12px 12px;
+    margin: 5px 0;
+    display: inline-block;
+    border: 2px solid #ccc;
+    box-sizing: border-box;
+}
+
+.myButton {
+   -webkit-border-radius: 20px;
+   -moz-border-radius: 20px;
+   border-radius: 20px;
+   height: 10px;
+   line-height: 10px;
+   color: #FFFFFF;
+   font-family: Arial;
+   width: 50px;
+   font-size: 15px;
+   font-weight: 100;
+   padding: 15px;
+   background-color: #212121;
+   box-shadow: 1px 1px 20px 0px #000000;
+   -webkit-box-shadow: 1px 1px 20px 0px #000000;
+   -moz-box-shadow: 1px 1px 20px 0px #000000;
+   text-shadow: 1px 1px 20px #000000;
+   border: solid #D5EAED 1px;
+   text-decoration: none;
+   display: inline-block;
+   cursor: pointer;
+}
+
+.myButton:hover {
+   background: #FFFFFF;
+   background-image: -webkit-linear-gradient(top, #FFFFFF, #010305);
+   background-image: -moz-linear-gradient(top, #FFFFFF, #010305);
+   background-image: -ms-linear-gradient(top, #FFFFFF, #010305);
+   background-image: -o-linear-gradient(top, #FFFFFF, #010305);
+   background-image: linear-gradient(to bottom, #FFFFFF, #010305);
+   text-decoration: none;
+}
+
+
+/* Center the avatar image inside this container */
+.imgcontainer {
+    text-align: center;
+    margin: 24px 0 12px 0;
+}
+
+/* Add padding to containers */
+.container {
+    padding: 16px;
+}
+
+}

@@ -1,45 +1,49 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
 
-	<h:head>
-	<title>HomePage</title>
+<h:head>
+	<link rel="stylesheet" href="resources/css/stockPage.css"></link>
+	<title>Available Stock Data</title>
 </h:head>
-
-
 <body>
 	<div align="center">
-		
-		<h1>HomePage</h1>
-		
-		<br/>
-		Welcome #{user.username}! You have successfully been logged in.
-		<br/>
-		<br/>
-		
-	    <a href="https://plot.ly/~joeya127/1/?share_key=F7dICMocutquBTDvB9AXJE"
-	     target="_blank" title="Plot 1" style="display: block; text-align: center;"><img
-	      src="https://plot.ly/~joeya127/1.png?share_key=F7dICMocutquBTDvB9AXJE" 
-	      alt="Plot 1" style="max-width: 100%;width: 600px;"  width="600" 
-	      onerror="this.onerror=null;this.src='https://plot.ly/404.png';" /></a>
-	    <script data-plotly="joeya127:1" sharekey-plotly="F7dICMocutquBTDvB9AXJE"
-	     src="https://plot.ly/embed.js"></script>
-	
-		<br/>
-		<div>
-    <a href="https://plot.ly/~joeya127/5/?share_key=jjUhfcVHv73qmmngenxE5o" 
-    target="_blank" title="Plot 5" style="display: block; text-align: center;"><img 
-    src="https://plot.ly/~joeya127/5.png?share_key=jjUhfcVHv73qmmngenxE5o" 
-    alt="Plot 5" style="max-width: 100%;width: 600px;"  width="600" 
-    onerror="this.onerror=null;this.src='https://plot.ly/404.png';" /></a>
-    <script data-plotly="joeya127:5" sharekey-plotly="jjUhfcVHv73qmmngenxE5o" 
-    src="https://plot.ly/embed.js"></script>
-</div>
-		<br/>
-		<h:button value="Logout" outcome="LoginPage.xhtml" />
+		<ul>
+			<li><a href="#news">News</a></li>
+			<li><a href="#contact">About</a></li>
+			<li><a href="LoginPage.xhtml">Logout</a></li>
+		</ul>
+		<h1>Available Stock Data</h1>
+			
+			<div class="flex-container-stockTitle" style="color: blue">
+			<h1>AAPL Stock</h1>
+			</div>
+			
+		<div class="flex-container">
+			<br />
+			    <a href="#" target="_blank" title="Plot 9" 
+			    style="display: block; text-align: center;"><img 
+			     src="https://plot.ly/~joeya127/9.png?share_key=oPQXeZe94LaBEBIKH4CxMF" 
+			     alt="Plot 9" style="max-width: 100%;width: 600px;"  width="600"
+			      onerror="this.onerror=null;this.src='https://plot.ly/404.png';" /></a>
+			    <script data-plotly="joeya127:9" 
+			    sharekey-plotly="oPQXeZe94LaBEBIKH4CxMF" 
+			    src="https://plot.ly/embed.js"></script>
+
+				<div style="width:10px"></div>
+				
+				<a href="#" target="_blank" title="Plot 5"
+					style="display: block; text-align: center;"><img
+					src="https://plot.ly/~joeya127/5.png?share_key=jjUhfcVHv73qmmngenxE5o"
+					alt="Plot 5" style="max-width: 100%; width: 600px;" width="600"
+					onerror="this.onerror=null;this.src='https://plot.ly/404.png';" /></a>
+				<script data-plotly="joeya127:5"
+					sharekey-plotly="jjUhfcVHv73qmmngenxE5o"
+					src="https://plot.ly/embed.js"></script>
+
+		</div>
 	</div>
-	
 </body>
 </html>

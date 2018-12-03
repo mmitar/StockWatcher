@@ -4,8 +4,10 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.interceptor.Interceptors;
 
 import beans.User;
+import business.InterceptorLogging;
 import business.UserInterface;
 
 /**
@@ -15,6 +17,7 @@ import business.UserInterface;
  */
 @ManagedBean
 @ViewScoped
+@Interceptors(InterceptorLogging.class)
 public class LoginController {
 	
 	private String redirect = null;

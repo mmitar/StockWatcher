@@ -8,11 +8,32 @@
 	
 }
 
-background{
-	background-image:url('../images/bg-01.jpg');
-	 filter: blur(8px);
-  -webkit-filter: blur(8px);
+#font {
+font-family: "Comic Sans MS", cursive, sans-serif;
+font-size: 12px;
+letter-spacing: -0.8px;
+word-spacing: 1.8px;
+color: #000000;
+font-weight: 400;
+text-decoration: none solid rgb(68, 68, 68);
+font-style: normal;
+font-variant: small-caps;
+text-transform: none;
 }
+#pageFont {
+font-family: "Comic Sans MS", cursive, sans-serif;
+font-size: 25px;
+letter-spacing: -.9px;
+word-spacing: 1.8px;
+color: #000000;
+font-weight: 400;
+text-decoration: underline solid rgb(68, 68, 68);
+font-style: normal;
+font-variant: small-caps;
+text-transform: none;
+}
+
+
 body{
 	background-image:url('../images/bg-01.jpg');
 	background-repeat: no-repeat;
@@ -23,6 +44,41 @@ body{
   	align-items: center;     /* with column: centers horizontally */
   	padding: 10px;
 }
+ul {
+	display: inline-block;
+    list-style-type: none;
+    margin: 10px;
+    padding: 5px;
+    overflow: hidden;
+    background-color: #333;
+    border-radius: 5px;
+
+}
+
+li {
+    float: left;
+}
+li b {
+display: inline-block;
+color: #CCCCCC;
+padding: 14px 350px;
+	
+}
+li a {
+    display: flex;
+    flex-direction: row;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+
+
+li a:hover {
+    background-color: #111;
+}
+
 
 
 .flex-container {
@@ -39,10 +95,6 @@ body{
 
 }
 
-.form input{
-	
-}
-
 /* Full-width inputs */
 .input[type=text], .input[type=password] {
     width: 45%;
@@ -54,36 +106,69 @@ body{
 }
 
 .myButton {
-   -webkit-border-radius: 20px;
-   -moz-border-radius: 20px;
-   border-radius: 20px;
-   height: 10px;
-   line-height: 10px;
-   color: #FFFFFF;
-   font-family: Arial;
-   width: 50px;
-   font-size: 15px;
-   font-weight: 100;
-   padding: 15px;
-   background-color: #212121;
-   box-shadow: 1px 1px 20px 0px #000000;
-   -webkit-box-shadow: 1px 1px 20px 0px #000000;
-   -moz-box-shadow: 1px 1px 20px 0px #000000;
-   text-shadow: 1px 1px 20px #000000;
-   border: solid #D5EAED 1px;
-   text-decoration: none;
-   display: inline-block;
-   cursor: pointer;
+	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #a6a6a6), color-stop(1, #dfdfdf));
+	background:-moz-linear-gradient(top, #a6a6a6 5%, #dfdfdf 100%);
+	background:-webkit-linear-gradient(top, #a6a6a6 5%, #dfdfdf 100%);
+	background:-o-linear-gradient(top, #a6a6a6 5%, #dfdfdf 100%);
+	background:-ms-linear-gradient(top, #a6a6a6 5%, #dfdfdf 100%);
+	background:linear-gradient(to bottom, #a6a6a6 5%, #dfdfdf 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#a6a6a6', endColorstr='#dfdfdf',GradientType=0);
+	background-color:#a6a6a6;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
+	border:1px solid #030003;
+	display:inline-block;
+	cursor:pointer;
+	color:#525252;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:6px 24px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #ffffff;
 }
-
 .myButton:hover {
-   background: #FFFFFF;
-   background-image: -webkit-linear-gradient(top, #FFFFFF, #010305);
-   background-image: -moz-linear-gradient(top, #FFFFFF, #010305);
-   background-image: -ms-linear-gradient(top, #FFFFFF, #010305);
-   background-image: -o-linear-gradient(top, #FFFFFF, #010305);
-   background-image: linear-gradient(to bottom, #FFFFFF, #010305);
-   text-decoration: none;
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #dfdfdf), color-stop(1, #a6a6a6));
+	background:-moz-linear-gradient(top, #dfdfdf 5%, #a6a6a6 100%);
+	background:-webkit-linear-gradient(top, #dfdfdf 5%, #a6a6a6 100%);
+	background:-o-linear-gradient(top, #dfdfdf 5%, #a6a6a6 100%);
+	background:-ms-linear-gradient(top, #dfdfdf 5%, #a6a6a6 100%);
+	background:linear-gradient(to bottom, #dfdfdf 5%, #a6a6a6 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#dfdfdf', endColorstr='#a6a6a6',GradientType=0);
+	background-color:#dfdfdf;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}
+.input { 
+	padding:9px; 
+	text-align:left; 
+	border-width:5px; 
+	border-radius:3px; 
+	border-style:inset; 
+	background-color:#ffffff; 
+	border-color:#ffffff; color:#000000; 
+	font-size:14px; 
+	box-shadow: 5px 4px 0px 0px rgba(42,42,42,.84); 
+	text-shadow:0px 0px 0px rgba(42,42,42,.75); 
+	font-family:sans-serif;  } 
+.input:focus { 
+	outline:none; 
+} 
+input[type="text"]:focus{
+outline: none;
+box-shadow: 0px 0px 5px #61C5FA;
+border:1px solid #5AB0DB;
+}
+input[type="password"]:focus{
+outline: none;
+box-shadow: 0px 0px 5px #61C5FA;
+border:1px solid #5AB0DB;
 }
 
 

@@ -8,10 +8,17 @@
 	<h:head>
 		<title>Register</title>
 		<link rel="stylesheet" href="resources/css/loginPage.css"></link>
+		
+		
+	<ul>
+			<li><a href="#news">News</a></li>
+			<li><a href="#contact">About</a></li>
+			<li><a href="LoginPage.xhtml">Login Page</a></li>
+	</ul>
 	</h:head>
 	<body>
 	<div class="flex-container">
-			<h1>Register</h1>
+			<div id="pageFont">Registration</div>
 			<h:form class="form">
 				<div style="block" align="center">
 				First name: <h:inputText styleClass="input" id="firstName" value="#{user.firstName}" title="" maxlength="30" required="true"/><br/><h:message for="firstName" style="color:red"/><br />
@@ -26,8 +33,8 @@
 				Password: <h:inputSecret styleClass="input" id="password" value="#{user.password}" title="" maxlength="30" required="true"/><br/><h:message for="password" style="color:red"/> <br />
 				</div>
 				
-				<h:commandButton value="Submit" action="#{registerController.registerUser(user)}"/><br />
-				<h:button value="Back" outcome="LoginPage.xhtml" />
+				<h:commandButton styleClass="myButton" value="Submit" action="#{registerController.registerUser(user)}"/><br />
+				<h:button styleClass="myButton" value="Back" outcome="LoginPage.xhtml" />
 			</h:form>
 	
 		    <c:choose>

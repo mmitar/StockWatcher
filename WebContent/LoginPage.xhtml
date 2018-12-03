@@ -1,31 +1,58 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:c="http://java.sun.com/jstl/core">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core">
+<h:head>
 
-	<h:head>
-		<title>Login Page</title>
-	</h:head>
-	<body>
-		<div align="center">
-			<h1>Login</h1>
-			<h:form>
-				Username: <h:inputText id="username" value="#{user.username}" title="" maxlength="30" required="true" /> <br/><h:message for="username" style="color:red"/> <br />
-				Password: <h:inputSecret id="password" value="#{user.password}" title="" maxlength="30" required="true" type="password" /> <br/><h:message for="password" style="color:red"/> <br />
-				 <br/>
-				<h:commandButton value="Submit" action="#{loginController.loginUser(user)}"/><br /> <br />	
-				Dont have an Account? Register <h:button value="Here" outcome="RegistrationPage.xhtml" />
-			</h:form>
+	<title>Login Page</title>
+	<link rel="stylesheet" href="resources/css/loginPage.css"></link>
+</h:head>
+
+<body>
+	<div class="flex-container">
+	<h1>Login</h1>
+	<h:form class="form">
+	
+			<div style="block" align="center">
+				User name:
+				<h:inputText styleClass="input" id="username"
+					value="#{user.username}" title="" maxlength="30" required="true" />
+				<br />
+				<h:message for="username"/>
+				<br />
+			</div>
 			
+			<div style="inline-block" align="center"	>
+				Password:
+				<h:inputSecret styleClass="input" id="password"
+					value="#{user.password}" title="" maxlength="30" required="true"
+					type="password" />
+				<br />
+				<h:message for="password"/>
+			</div>
 			<br/>
-			<br/>
-			<c:choose>
-			  <c:when test="#{not empty error}">
-			      <div style="color: red">#{error}</div>
-			  </c:when>	
-		  </c:choose>
-		</div>
-	</body>
+			
+				<h:commandButton styleClass="myButton" value="Submit"
+					action="#{loginController.loginUser(user)}" />
+				<br /> <br />Dont have an Account? Register
+				<br/>
+				<h:button styleClass="myButton" value="Here"
+					outcome="RegistrationPage.xhtml" />
+			
+			
+	</h:form>
+	
+	<div align="center" style="color: red">
+		<c:choose>
+		<c:when test="#{not empty error}">
+		<br/>
+			#{error}
+		</c:when>
+	</c:choose>
+	</div>
+	</div>	
+</body>
+
 </html>

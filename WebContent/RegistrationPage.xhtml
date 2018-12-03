@@ -7,28 +7,35 @@
 
 	<h:head>
 		<title>Register</title>
+		<link rel="stylesheet" href="resources/css/loginPage.css"></link>
 	</h:head>
 	<body>
-		<div align="center">
+	<div class="flex-container">
 			<h1>Register</h1>
-			<h:form>
-				Firstname: <h:inputText id="firstName" value="#{user.firstName}" title="" maxlength="30" required="true"/><br/><h:message for="firstName" style="color:red"/><br />
-				Lastname: <h:inputText id="lastName" value="#{user.lastName}" title="" maxlength="30" required="true"/><br/><h:message for="lastName" style="color:red"/> <br />
-				Username: <h:inputText id="username" value="#{user.username}" title="" maxlength="30" required="true"/><br/><h:message for="username" style="color:red"/> <br />
-				Password: <h:inputSecret id="password" value="#{user.password}" title="" maxlength="30" required="true"/><br/><h:message for="password" style="color:red"/> <br />
+			<h:form class="form">
+				<div style="block" align="center">
+				First name: <h:inputText styleClass="input" id="firstName" value="#{user.firstName}" title="" maxlength="30" required="true"/><br/><h:message for="firstName" style="color:red"/><br />
+				</div>
+				<div style="block" align="center">
+				Last name: <h:inputText styleClass="input" id="lastName" value="#{user.lastName}" title="" maxlength="30" required="true"/><br/><h:message for="lastName" style="color:red"/> <br />
+				</div>
+				<div style="block" align="center">
+				User name: <h:inputText styleClass="input" id="username" value="#{user.username}" title="" maxlength="30" required="true"/><br/><h:message for="username" style="color:red"/> <br />
+				</div>
+				<div style="block" align="center">
+				Password: <h:inputSecret styleClass="input" id="password" value="#{user.password}" title="" maxlength="30" required="true"/><br/><h:message for="password" style="color:red"/> <br />
+				</div>
 				
-				<br/>
-				<h:commandButton value="Submit" action="#{registerController.registerUser(user)}"/><br /> <br />
+				<h:commandButton value="Submit" action="#{registerController.registerUser(user)}"/><br />
 				<h:button value="Back" outcome="LoginPage.xhtml" />
 			</h:form>
-			
-			<br/>
-			<br/>
+	
 		    <c:choose>
 			  <c:when test="#{not empty error}">
 			      <div style="color: red">#{error}</div>
+			      <br/>
 			  </c:when>	
 		  </c:choose>
-		</div>
+		  </div>
 	</body>
 </html>

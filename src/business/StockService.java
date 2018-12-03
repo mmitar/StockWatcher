@@ -4,6 +4,7 @@ import javax.ejb.EJB;
 import javax.ejb.Local;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 
 import beans.Stock;
 import data.StockDataInterface;
@@ -18,7 +19,7 @@ public class StockService implements StockInterface {
 	 * @return StockDataService methods
 	 */
 	
-	@EJB
+	@Inject
 	StockDataInterface<Stock> dao;
 	/**
 	 * calls consumeStockIOT through SDI service

@@ -4,10 +4,12 @@ import javax.ejb.EJB;
 import javax.ejb.Local;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.interceptor.Interceptors;
 
 import beans.User;
 import data.DataAccessInterface;
+import util.InterceptorLogging;
 import util.UserFoundException;
 import util.UserNotFoundException;
 
@@ -17,7 +19,7 @@ import util.UserNotFoundException;
 @Interceptors(InterceptorLogging.class)
 public class UserService implements UserInterface {
 	
-	@EJB
+	@Inject
 	DataAccessInterface<User> dao;
 	
 	

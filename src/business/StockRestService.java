@@ -2,6 +2,7 @@ package business;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -16,7 +17,7 @@ import util.StockNotFoundException;
 @Path("/stocks")
 public class StockRestService {
 	
-	@EJB
+	@Inject
 	StockInterface service;
 	
 	@POST

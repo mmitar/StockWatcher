@@ -1,6 +1,7 @@
 package controllers;
 
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -28,7 +29,7 @@ public class RegisterController {
 	 * @param user: User
 	 * @return view: String
 	 */
-	@EJB
+	@Inject
 	private UserInterface service;
 	
 	/**

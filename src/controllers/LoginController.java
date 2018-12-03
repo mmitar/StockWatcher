@@ -4,11 +4,12 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import javax.interceptor.Interceptors;
 
 import beans.User;
-import business.InterceptorLogging;
 import business.UserInterface;
+import util.InterceptorLogging;
 import util.UserNotFoundException;
 
 /**
@@ -30,7 +31,7 @@ public class LoginController {
 	 * @param user
 	 * @return
 	 */	
-	@EJB
+	@Inject
 	private UserInterface service;
 	
 	/**

@@ -9,6 +9,7 @@ import javax.interceptor.Interceptors;
 import beans.User;
 import business.InterceptorLogging;
 import business.UserInterface;
+import util.UserNotFoundException;
 
 /**
  * Validates login modules within the app. No DB is currently implemented.
@@ -43,7 +44,8 @@ public class LoginController {
 		{
 			this.service.findBy(user);
 		}
-		catch(Exception e)
+		// If User Does not Exist / Error finding User
+		catch(UserNotFoundException e)
 		{  
 			this.error = "Username or Password is Incorrect.";
 			this.redirect = "LoginPage.xhtml";

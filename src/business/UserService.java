@@ -1,6 +1,5 @@
 package business;
 
-import javax.ejb.EJB;
 import javax.ejb.Local;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -45,12 +44,10 @@ public class UserService implements UserInterface {
 	{	
         if(dao.findBy(user) == null)
         {
-        	System.out.println("Happy traitsl");
         	return dao.create(user);
         }
         else
         {
-        	System.out.println("throw this hsit");
             throw new UserFoundException();
         }
 	}

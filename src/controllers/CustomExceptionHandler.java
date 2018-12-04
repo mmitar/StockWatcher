@@ -1,6 +1,7 @@
 package controllers;
 
 import java.io.PrintWriter;
+import java.io.Serializable;
 import java.io.StringWriter;
 import java.util.Iterator;
 import java.util.Map;
@@ -12,9 +13,14 @@ import javax.faces.context.ExceptionHandlerWrapper;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ExceptionQueuedEvent;
 import javax.faces.event.ExceptionQueuedEventContext;
+import javax.interceptor.Interceptors;
 
-public class CustomExceptionHandler extends ExceptionHandlerWrapper
+import util.InterceptorLogging;
+
+@Interceptors(InterceptorLogging.class)
+public class CustomExceptionHandler extends ExceptionHandlerWrapper implements Serializable
 {
+	private static final long serialVersionUID = 1L;
 	private ExceptionHandler wrapped;
 
 	CustomExceptionHandler(ExceptionHandler exception)

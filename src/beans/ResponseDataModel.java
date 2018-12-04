@@ -1,5 +1,6 @@
 package beans;
 
+import javax.ejb.Local;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -8,6 +9,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author speed
  *
  */
+@Local(Response.class)
 @XmlRootElement(name="Response")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class ResponseDataModel extends ResponseModel implements Response {
@@ -48,5 +50,10 @@ public class ResponseDataModel extends ResponseModel implements Response {
     public void setData(Stock data) {
         this.data = data;
     }
+
+	@Override
+	public String toString() {
+		return "ResponseDataModel [data=" + data.toString() + "]";
+	}
     
 }

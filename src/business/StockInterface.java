@@ -1,6 +1,7 @@
 package business;
 
 import beans.Stock;
+import util.PostException;
 import util.StockNotFoundException;
 
 /**
@@ -15,6 +16,6 @@ public interface StockInterface {
 	 * @return Stock
 	 */	
 	public Stock getStock(String symbol) throws StockNotFoundException;
-	public boolean saveStock(Stock stock) throws StockNotFoundException;
+	public boolean saveStock(Stock stock) throws PostException;
 
 }

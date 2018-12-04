@@ -1,6 +1,6 @@
 package util;
 
-public class StockNotFoundException extends RuntimeException{
+public class StockNotFoundException extends Exception{
 
 	private static final long serialVersionUID = 0L;
 }

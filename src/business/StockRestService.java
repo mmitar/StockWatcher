@@ -1,8 +1,8 @@
 package business;
 
-import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.interceptor.Interceptors;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -10,14 +10,14 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import beans.Response;
-import beans.ResponseDataModel;
 import beans.ResponseFactory;
 import beans.Stock;
+import util.InterceptorLogging;
 import util.PostException;
-import util.StockNotFoundException;
 
 @Stateless
 @Path("/stocks")
+@Interceptors(InterceptorLogging.class)
 public class StockRestService {
 	
 	@Inject
@@ -29,6 +29,7 @@ public class StockRestService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response saveStock_AAPL(Stock stock) {
 		
+		// Assembles Responses Based on Status + Parameter
 		ResponseFactory factory = new ResponseFactory();
 		
 		try 
@@ -37,7 +38,7 @@ public class StockRestService {
 			
 			return dto;
 		}
-		// When Stock cannot be Saved.
+		// When POST failed and stock was not saved.
 		catch(PostException e)
 		{
 			return factory.getResponse400(e);

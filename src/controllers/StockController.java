@@ -1,14 +1,18 @@
 package controllers;
 
-import javax.ejb.EJB;
+import java.io.Serializable;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import javax.interceptor.Interceptors;
 import javax.servlet.http.HttpServletRequest;
 
 import beans.Stock;
 import business.StockInterface;
+import util.InterceptorLogging;
+import util.StockNotFoundException;
 
 /**
  * Handles Stock model requests. Injects Stock service layer.
@@ -17,8 +21,10 @@ import business.StockInterface;
  */
 @ManagedBean
 @ViewScoped
-public class StockController {
-	
+@Interceptors(InterceptorLogging.class)
+public class StockController implements Serializable
+{
+	private static final long serialVersionUID = 1L;
 	private String redirect = null;
 	private String error = null;
 	
@@ -46,7 +52,7 @@ public class StockController {
         	//if a stock is found 
 			stock = this.service.getStock(symbol);
         }
-        catch(Exception e)// catch if no stock has  been found and redirect them back to the same page
+        catch(StockNotFoundException e)// catch if no stock has  been found and redirect them back to the same page
         {
         	
         	this.error = "No stock data found using: "+symbol;

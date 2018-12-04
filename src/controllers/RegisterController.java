@@ -20,7 +20,6 @@ import util.UserFoundException;
  * @author Matthew & Joey
  *
  */
-
 @ManagedBean
 @ViewScoped
 @Interceptors(InterceptorLogging.class)
@@ -48,21 +47,26 @@ public class RegisterController implements Serializable
 	{
 		try 
 		{
+			// Call Service to create the user
 			this.service.create(user);
 		} 
+		// Catch a User Found Exception if the create method fails
 		catch (UserFoundException e) 
 		{
 			this.redirect = "RegistrationPage.xhtml";
 			this.error = "User name already exists";
 		}
 
+		// Set a user instance to the Faces Context.
 		FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("user",user);
 		
+		// Redirect user to the exception view
 		if(this.redirect != null) {
 			FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("error",this.error);
 			return this.redirect;
 		}
 		
-		return "RegistrationSuccess.xhtml"; // return view
+		 // return view
+		return "RegistrationSuccess.xhtml";
 	}
 }

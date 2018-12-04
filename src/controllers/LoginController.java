@@ -38,6 +38,7 @@ public class LoginController implements Serializable
 	private UserInterface service;
 	
 	/**
+	 * Method that is used to login the User and call services to verify credentials.
 	 * 
 	 * @param user: User
 	 * @return view: String
@@ -46,6 +47,7 @@ public class LoginController implements Serializable
 	{	
 		try	
 		{
+			// Call service to try to find the user by their input
 			this.service.findBy(user);
 		}
 		// If User Does not Exist / Error finding User
@@ -55,13 +57,16 @@ public class LoginController implements Serializable
 			this.redirect = "LoginPage.xhtml";
 		}
 		
+		// Put the user to the faces context for the next view
 		FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("user", user);
 		
+		// Redirect the user to the exception view.
 		if(this.redirect != null) {
 			FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("error",this.error);
 			return this.redirect;
 		}
 		
-		return "HomePage.xhtml"; // return view
+		 // return view
+		return "HomePage.xhtml";
 	}	
 }

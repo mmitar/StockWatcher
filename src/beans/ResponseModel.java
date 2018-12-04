@@ -1,8 +1,8 @@
 package beans;
 
-import javax.ejb.Local;
-
-@Local(Response.class)
+/**
+ * implements parent Response
+ */
 public class ResponseModel implements Response {
     
     private int status;

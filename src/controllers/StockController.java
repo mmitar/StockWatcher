@@ -41,6 +41,7 @@ public class StockController implements Serializable
 	 */
 	public String getStock()
 	{	
+		// Get the Form Post
 		HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
         String symbol = request.getParameter("symbolForm:symbol");
 		
@@ -52,9 +53,9 @@ public class StockController implements Serializable
         	//if a stock is found 
 			stock = this.service.getStock(symbol);
         }
-        catch(StockNotFoundException e)// catch if no stock has  been found and redirect them back to the same page
+     // catch if no stock has  been found and redirect them back to the same page
+        catch(StockNotFoundException e)
         {
-        	
         	this.error = "No stock data found using: "+symbol;
 			this.redirect = "HomePage.xhtml"; // return view
 		}
@@ -62,6 +63,7 @@ public class StockController implements Serializable
 		//Forwards the User ManagedBean
 		FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("stock", stock);
 		
+		// Redirect the user to the targeted view.
 		if(this.redirect != null) {
 			FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("error",this.error);
 			return this.redirect;

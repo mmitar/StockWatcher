@@ -1,17 +1,27 @@
 package beans;
 
+import util.DatabaseException;
 import util.PostException;
 import util.StockNotFoundException;
 
+/**
+ * Delegates the process of assembling an accurate response based on the dataset for REST services.
+ * If dataset is instanceof boolean, a POST method was invoked.
+ * If dataset is instanceof Stock, a GET method was invoked.
+ * if dataset is instanceof Exception, an error or business logic failure was encountered.
+ */
 public class ResponseFactory 
 {
 	/**
-	 * Status Code: 201. Posted objected was created.
+	 * Status Code 200 for successful transactions. 
+	 * 
+	 * @param dataset Object
 	 * @return Response
 	 */
 	public Response getResponse200(Object dataset)
 	{
-		int status = 201;
+		// Default Reponse params
+		int status = 200;
 		String message = "Request Executed: ";
 		Stock data = null;
 		
@@ -52,22 +62,30 @@ public class ResponseFactory
 			message += "Successful.";
 		}
 		
+		// return assembled ResponseDataModel
 		return new ResponseDataModel(status, message, data);
 	}
 
-	public Response getResponse400(Object e)
+	/**
+	 * Status code 400 for client errors
+	 * 
+	 * @param exception Object
+	 * @return Response
+	 */
+	public Response getResponse400(Object exception)
 	{
+		// Default Response params
 		int status = 400;
 		String message = "Bad Request: ";
 		
 		// if GET failed and Stock does not exist.
-		if(e instanceof StockNotFoundException)
+		if(exception instanceof StockNotFoundException)
 		{
 			status = 404;
 			message += "Stock Does Not Exist.";
 		}
 		// If POST failed and did not get processed successfully.
-		else if(e instanceof PostException)
+		else if(exception instanceof PostException)
 		{
 			status = 406;
 			message += "Could not be successfully processed.";
@@ -78,19 +96,38 @@ public class ResponseFactory
 			message += "Try again later.";
 		}
 		
+		// Return assembled ReponseModel
 		return new ResponseModel(status, message);
 	}
 	
-	public Response getResponse500(Object e)
+	/**
+	 * Status code 500 for internal system errors
+	 * 
+	 * @param exception Object
+	 * @return Response
+	 */
+	public Response getResponse500(Object exception)
 	{
 		int status = 500;
 		String message = "Internal System Explosion: ";
 		
-		if(e instanceof Exception)
+		// If there was an exception thrown from the database
+		if(exception instanceof DatabaseException)
+		{
+			message += "Database server is currently unavailable.";
+		}
+		// Generic response message for the whole system crashing, unknown origin.
+		else if(exception instanceof Exception)
 		{
 			message += "Yikes.. Try again later.";
 		}
+		// Should be unreachedable.
+		else
+		{
+			message += "Call 911.";
+		}
 		
+		// return assembled ResponseModel
 		return new ResponseModel(status, message);
 	}
 }

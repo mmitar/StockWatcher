@@ -1,6 +1,6 @@
 package beans;
 
-public class ResponseModel {
+public class ResponseModel implements Response {
     
     private int status;
     private String message;

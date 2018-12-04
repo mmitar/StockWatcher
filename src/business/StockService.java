@@ -8,6 +8,7 @@ import javax.inject.Inject;
 
 import beans.Stock;
 import data.StockDataInterface;
+import util.PostException;
 import util.StockNotFoundException;
 
 @Stateless
@@ -35,7 +36,7 @@ public class StockService implements StockInterface {
 		}
 		else
 		{
-			throw new StockNotFoundException();
+			throw new PostException();
 		}
 		
 	}

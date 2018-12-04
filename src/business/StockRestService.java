@@ -9,8 +9,11 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import beans.Response;
 import beans.ResponseDataModel;
+import beans.ResponseFactory;
 import beans.Stock;
+import util.PostException;
 import util.StockNotFoundException;
 
 @Stateless
@@ -24,24 +27,25 @@ public class StockRestService {
 	@Path("/previous")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public ResponseDataModel saveStock_AAPL(Stock stock) {
+	public Response saveStock_AAPL(Stock stock) {
 		
-		try {
-			service.saveStock(stock);
+		ResponseFactory factory = new ResponseFactory();
+		
+		try 
+		{
+			Response dto = factory.getResponse200(service.saveStock(stock));
 			
-			ResponseDataModel dto = new ResponseDataModel(201,"Request Successfully Executed. Stock saved.", null);
 			return dto;
 		}
-		// When Stock cannot be Saved
-		catch(StockNotFoundException e)
+		// When Stock cannot be Saved.
+		catch(PostException e)
 		{
-			ResponseDataModel dto = new ResponseDataModel(401,"We are unable to handle the request. Try again later.", null);
-			return dto;
+			return factory.getResponse400(e);
 		} 
+		// Catching DB exceptions
 		catch(Exception e)
 		{
-			ResponseDataModel dto = new ResponseDataModel(501,"Internal System Explosion. Try again later.", null);
-			return dto;
+			return factory.getResponse500(e);
 		}
 	}
 }

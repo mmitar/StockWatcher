@@ -13,7 +13,8 @@ import util.InterceptorLogging;
 import util.UserNotFoundException;
 
 /**
- * Validates login modules within the app. No DB is currently implemented.
+ * Validates login modules within the app.
+ * 
  * @author Matthew & Joey
  *
  */

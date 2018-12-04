@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlRootElement(name="Response")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class ResponseDataModel extends ResponseModel {
+public class ResponseDataModel extends ResponseModel implements Response {
 	
     private Stock data;
     

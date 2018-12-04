@@ -1,5 +1,8 @@
 package beans;
 
+import javax.ejb.Local;
+
+@Local(Response.class)
 public class ResponseModel implements Response {
     
     private int status;
@@ -23,5 +26,10 @@ public class ResponseModel implements Response {
     public void setMessage(String message) {
         this.message = message;
     }
-   
+
+	@Override
+	public String toString() {
+		return "ResponseModel [status=" + status + ", message=" + message + "]";
+	}
+    
 }

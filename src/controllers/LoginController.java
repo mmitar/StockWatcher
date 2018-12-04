@@ -1,6 +1,7 @@
 package controllers;
 
-import javax.ejb.EJB;
+import java.io.Serializable;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
@@ -21,8 +22,9 @@ import util.UserNotFoundException;
 @ManagedBean
 @ViewScoped
 @Interceptors(InterceptorLogging.class)
-public class LoginController {
-	
+public class LoginController implements Serializable
+{
+	private static final long serialVersionUID = 1L;
 	private String redirect = null;
 	private String error = null;
 	

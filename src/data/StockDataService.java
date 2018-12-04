@@ -10,9 +10,11 @@ import java.util.List;
 import javax.ejb.Local;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+import javax.interceptor.Interceptors;
 
 import beans.Stock;
 import util.DatabaseException;
+import util.InterceptorLogging;
 
 /**
  * Contracted with StockDataInterface. Calls the IOT to collect API data
@@ -22,6 +24,7 @@ import util.DatabaseException;
 @Stateless
 @Local(StockDataInterface.class)
 @LocalBean
+@Interceptors(InterceptorLogging.class)
 public class StockDataService implements StockDataInterface<Stock> {
 
 	private static Connection conn = null;

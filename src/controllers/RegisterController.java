@@ -2,12 +2,17 @@ package controllers;
 
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
-import javax.ejb.EJB;
+import javax.interceptor.Interceptors;
+
+import java.io.Serializable;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 import beans.User;
 import business.UserInterface;
+import util.InterceptorLogging;
+import util.UserFoundException;
 
 
 /**
@@ -18,8 +23,10 @@ import business.UserInterface;
 
 @ManagedBean
 @ViewScoped
-public class RegisterController {
-	
+@Interceptors(InterceptorLogging.class)
+public class RegisterController implements Serializable
+{
+	private static final long serialVersionUID = 1L;
 	private String redirect = null;
 	private String error = null;
 	
@@ -43,7 +50,7 @@ public class RegisterController {
 		{
 			this.service.create(user);
 		} 
-		catch (Exception e) 
+		catch (UserFoundException e) 
 		{
 			this.redirect = "RegistrationPage.xhtml";
 			this.error = "User name already exists";

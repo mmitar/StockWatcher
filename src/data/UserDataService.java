@@ -10,22 +10,23 @@ import java.util.List;
 import javax.ejb.Local;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+import javax.interceptor.Interceptors;
 
 import beans.User;
 import util.DatabaseException;
+import util.InterceptorLogging;
 
 @Stateless
 @Local(DataAccessInterface.class)
 @LocalBean
+@Interceptors(InterceptorLogging.class)
 public class UserDataService implements DataAccessInterface<User> {
 	
 	/**
 	 * Creating connection to mySQL db 'swatcherdb'
 	 * also using my username and password 
 	 * 
-	 * 
 	 */	
-	
 	Connection conn = null;
 	String url = "jdbc:mysql://localhost:3306/swatcherdb";
 	String username = "root";

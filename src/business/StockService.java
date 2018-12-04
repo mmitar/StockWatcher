@@ -1,19 +1,21 @@
 package business;
 
-import javax.ejb.EJB;
 import javax.ejb.Local;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.interceptor.Interceptors;
 
 import beans.Stock;
 import data.StockDataInterface;
+import util.InterceptorLogging;
 import util.PostException;
 import util.StockNotFoundException;
 
 @Stateless
 @Local(StockInterface.class)
 @LocalBean
+@Interceptors(InterceptorLogging.class)
 public class StockService implements StockInterface {
 
 	/**
@@ -28,7 +30,7 @@ public class StockService implements StockInterface {
 	 */
 	
 	@Override
-	public boolean saveStock(Stock stock) throws StockNotFoundException{
+	public boolean saveStock(Stock stock) throws PostException{
 		
 		if(dao.create(stock) == true)
 		{
@@ -38,7 +40,6 @@ public class StockService implements StockInterface {
 		{
 			throw new PostException();
 		}
-		
 	}
 
 	@Override

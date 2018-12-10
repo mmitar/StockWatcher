@@ -29,10 +29,7 @@ public class RegisterController implements Serializable
 	private String error = null;
 	
 	/**
-	 * Registers the User Model and navigates them to the Success page
-	 * 
-	 * @param user: User
-	 * @return view: String
+	 * @return UserService methods
 	 */
 	@EJB
 	private UserInterface service;
@@ -40,7 +37,8 @@ public class RegisterController implements Serializable
 	/**
 	 * Controller method on Submit in takes a user from user Model and returns a String for registration.
 	 *  
-	 * @return View
+	 * @param user User
+	 * @return view: String
 	 */
 	public String registerUser(User user) 
 	{

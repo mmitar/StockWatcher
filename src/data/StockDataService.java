@@ -17,7 +17,7 @@ import util.DatabaseException;
 import util.InterceptorLogging;
 
 /**
- * Contracted with StockDataInterface. Calls the IOT to collect API data
+ * Contracted with StockDataInterface. Hanldes all DAO requests regarding stock.
  * @author Matthew & Joey
  *
  */
@@ -35,24 +35,14 @@ public class StockDataService implements StockDataInterface<Stock> {
 	private final String username = "root";
 	private final String password = "root";
 	
-	@Override
-	public List<Stock> findAll() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Stock findById(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	/**
-	 * Finding stock 
+	 * READ method
+	 * extract the most recent stock data relative to the symbol input by the user. ex: "AAPL". 
 	 * 
-	 * @param String
+	 * @param String symbol
 	 * @return Stock
+	 * @throws DatabaseException
 	 */	
-
 	@Override
 	public Stock findBy(String symbol) {
 		
@@ -81,35 +71,44 @@ public class StockDataService implements StockDataInterface<Stock> {
 			
 			rs.close();
 			stmt.close();
-			
-		}catch(SQLException e) {
-			e.printStackTrace();
-			throw new DatabaseException(e);
-		}finally {
-			{
-				//Cleanup Database
-				if(conn != null) 
-				{
-					try {
-					conn.close();
-					} catch (SQLException e)
-					{
-						e.printStackTrace();			
-						throw new DatabaseException(e);
-					}
-				}
-			}
 		}
+		// If there was a SQL or DB Connection Error. Throw DB Exception
+		catch(SQLException e)        
+    	{
+        	e.printStackTrace();
+        	throw new DatabaseException(e);
+        }
+		// Execute after try-catch block to cleanup the connection
+        finally
+        {
+        	// If there was a connection instantiated in some form.
+        	if(conn != null)
+        	{	
+        		try
+        		{
+        			// if connection was made now close it
+        			conn.close();
+        		}
+        		// If there was an issue closing the Connection
+        		catch(SQLException e)
+        		{
+        			e.printStackTrace();
+        			throw new DatabaseException(e);
+        		}       		
+        	}       	
+        }
 		//returning stock if null or with data
 		return stock;
 	}
+	
 	/**
+	 * CREATE method
 	 * Constantly collecting more stock data and it is put in database through this method
 	 * 
-	 * @param Stock
+	 * @param Stock stock
 	 * @return boolean
+	 * @throws DatabaseException
 	 */	
-	
 	@Override
 	public boolean create(Stock stock) 
 	{
@@ -134,33 +133,43 @@ public class StockDataService implements StockDataInterface<Stock> {
 			stmt.close();
 			
 		}
-		catch(SQLException e)
-		{
-			// DB expcetion catch
-			e.printStackTrace();
-			throw new DatabaseException(e);
-		}
-		finally 
-		{
-			//Cleanup Database
-			if(conn != null) 
-			{
-				try 
-				{
-					//close connection
-				conn.close();
-				} 
-				catch (SQLException e)
-				{
-					e.printStackTrace();			
-					throw new DatabaseException(e);
-				}
-			}
-		}
+		// If there was a SQL or DB Connection Error. Throw DB Exception
+		catch(SQLException e)        
+    	{
+        	e.printStackTrace();
+        	throw new DatabaseException(e);
+        }
+		// Execute after try-catch block to cleanup the connection
+        finally
+        {
+        	// If there was a connection instantiated in some form.
+        	if(conn != null)
+        	{	
+        		try
+        		{
+        			// if connection was made now close it
+        			conn.close();
+        		}
+        		// If there was an issue closing the Connection
+        		catch(SQLException e)
+        		{
+        			e.printStackTrace();
+        			throw new DatabaseException(e);
+        		}       		
+        	}       	
+        }
 		//return reuslt if null or with data
 		return result;
 	}
 
+	/**
+	 * UPDATE method
+	 * Updates an existing Stock set. Not currently implemented because we want new instances.
+	 * 
+	 * @param Stock stock
+	 * @return boolean
+	 * @throws DatabaseException
+	 */
 	@Override
 	public boolean update(Stock stock) {
 		
@@ -184,43 +193,64 @@ public class StockDataService implements StockDataInterface<Stock> {
 			// Close the connection
 			stmt.close();
 		}
-		// Throw a database connection exception
-		catch(SQLException e) 
-		{
-			e.printStackTrace();
-			throw new DatabaseException(e);
-		}
-		finally 
-		{
-			//Cleanup Database
-			if(conn != null) 
-			{
-				try 
-				{
-					conn.close();
-				} 
-				// Throw a database Exception Connection
-				catch (SQLException e)
-				{
-					e.printStackTrace();			
-					throw new DatabaseException(e);
-				}
-			}
-		}
+		// If there was a SQL or DB Connection Error. Throw DB Exception
+		catch(SQLException e)        
+    	{
+        	e.printStackTrace();
+        	throw new DatabaseException(e);
+        }
+		// Execute after try-catch block to cleanup the connection
+        finally
+        {
+        	// If there was a connection instantiated in some form.
+        	if(conn != null)
+        	{	
+        		try
+        		{
+        			// if connection was made now close it
+        			conn.close();
+        		}
+        		// If there was an issue closing the Connection
+        		catch(SQLException e)
+        		{
+        			e.printStackTrace();
+        			throw new DatabaseException(e);
+        		}       		
+        	}       	
+        }
 		// Return the results from the update
 		return result;
 	}
 
+	/**
+	 * Inactive.
+	 */
 	@Override
 	public boolean delete(Stock t) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
+	/**
+	 * Inactive.
+	 */
 	@Override
 	public Stock findBy(Stock t) {
-		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	/**
+	 * Inactive.
+	 */
+	@Override
+	public List<Stock> findAll() {
 		return null;
 	}
 
+	/**
+	 * Inactive.
+	 */
+	@Override
+	public Stock findById(int id) {
+		return null;
+	}
 }

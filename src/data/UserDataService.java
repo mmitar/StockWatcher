@@ -16,6 +16,11 @@ import beans.User;
 import util.DatabaseException;
 import util.InterceptorLogging;
 
+/**
+ * Contracted with the DataAccessInterface. Handles all DAO requests regarding User information.
+ * @author Matt
+ *
+ */
 @Stateless
 @Local(DataAccessInterface.class)
 @LocalBean
@@ -30,16 +35,13 @@ public class UserDataService implements DataAccessInterface<User> {
 	String username = "root";
 	String password = "root";
 	
-	@Override
-	public List<User> findAll() {
-		// TODO Auto-generated method stub
-		return null;
-	}	
 	/**
-	 * Login method to find selected user
+	 * READ method
+	 * A validation method to identify if the parameters match an existing user and returns the User if found.
 	 * 
-	 * @param user
+	 * @param user User
 	 * @return User
+	 * @throws DatabaseException
 	 */	
 	@Override
 	public User findBy(User user) {
@@ -66,24 +68,28 @@ public class UserDataService implements DataAccessInterface<User> {
 				//if no user is found return null
 				user = null;
 			}
-			//close connection to prevent garabe build up
+			// close connection to prevent garbage build up
 			rs.close();
 			stmt.close();
 		}
+		// If there was a SQL or DB Connection Error. Throw DB Exception
 		catch(SQLException e)        
     	{
-			//if database connection failed or doesnt make connection period
         	e.printStackTrace();
         	throw new DatabaseException(e);
         }
+		// Execute after try-catch block to cleanup the connection
         finally
         {
+        	// If there was a connection instantiated in some form.
         	if(conn != null)
         	{	
         		try
         		{
+        			// if connection was made now close it
         			conn.close();
         		}
+        		// If there was an issue closing the Connection
         		catch(SQLException e)
         		{
         			e.printStackTrace();
@@ -95,12 +101,13 @@ public class UserDataService implements DataAccessInterface<User> {
 		return user;
     }	
 	/**
-	 * DAO method to register new user and enter user data in database
+	 * CREATE method
+	 * Registers a new user based on the input params.
 	 * 
-	 * @param user
-	 * @return Boolean
+	 * @param user User
+	 * @return boolean
+	 * @throws DatabaseException
 	 */	
-	
 	@Override
 	public boolean create(User user) 
 	{
@@ -123,21 +130,24 @@ public class UserDataService implements DataAccessInterface<User> {
 			//close connection
 			stmt.close();
 		}
+		// If there was a SQL or DB Connection Error. Throw DB Exception
 		catch(SQLException e)        
     	{
-			//DB exception for failed database connection
         	e.printStackTrace();
         	throw new DatabaseException(e);
         }
+		// Execute after try-catch block to cleanup the connection
         finally
         {
+        	// If there was a connection instantiated in some form.
         	if(conn != null)
         	{	
         		try
         		{
-        			//if connection was made now close it
+        			// if connection was made now close it
         			conn.close();
         		}
+        		// If there was an issue closing the Connection
         		catch(SQLException e)
         		{
         			e.printStackTrace();
@@ -145,29 +155,39 @@ public class UserDataService implements DataAccessInterface<User> {
         		}       		
         	}       	
         }
-		//return result if its false or true
+		// return result if its false or true
 		return result;
     }
 		
+	/**
+	 * Inactive.
+	 */
+	@Override
+	public List<User> findAll() {
+		return null;
+	}	
+	
+	/**
+	 * Inactive.
+	 */
 	@Override
 	public boolean update(User t) {
-		// TODO Auto-generated method stub
 		return false;
-	}
-	@Override
-	public boolean delete(User t) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-	@Override
-	public User findById(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public User findBy(String string) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 	
+	/**
+	 * Inactive.
+	 */
+	@Override
+	public boolean delete(User t) {
+		return false;
+	}
+	
+	/**
+	 * Inactive.
+	 */
+	@Override
+	public User findById(int id) {
+		return null;
+	}
 }

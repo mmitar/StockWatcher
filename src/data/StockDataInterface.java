@@ -3,18 +3,62 @@ package data;
 import java.util.List;
 
 /**
- * Contracts StockDataService with implemented methods
- * @author Matthew & Joey
- *
+ * Generic interface that contracts methods for CDI. This is currently only being implemented for StockDataService.
  */
 public interface StockDataInterface<T> 
 {
-		public List<T> findAll();
-		public T findById(int id);
-		public T findBy(T t);
-		//TODO change string value name
-		public T findBy(String string);
-		public boolean create(T t);
-		public boolean update(T t);
-		public boolean delete(T t);
+	/**
+	 * READ method
+	 * 
+	 * @return List<T>
+	 */
+	public List<T> findAll();
+	
+	/**
+	 * READ method
+	 * 
+	 * @param id int
+	 * @return T
+	 */
+	public T findById(int id);
+	
+	/**
+	 * READ method
+	 * 
+	 * @param t T
+	 * @return T
+	 */
+	public T findBy(T t);
+	
+	/**
+	 * READ method
+	 * 
+	 * @param string String
+	 * @return T
+	 */
+	public T findBy(String string);
+	
+	/**
+	 * CREATE method
+	 * 
+	 * @param t T
+	 * @return boolean
+	 */
+	public boolean create(T t);
+	
+	/**
+	 * UPDATE method
+	 * 
+	 * @param t T
+	 * @return boolean
+	 */
+	public boolean update(T t);
+	
+	/**
+	 * DELETE method
+	 * 
+	 * @param t T
+	 * @return boolean
+	 */
+	public boolean delete(T t);
 }

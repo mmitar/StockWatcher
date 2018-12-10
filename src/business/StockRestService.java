@@ -20,9 +20,19 @@ import util.PostException;
 @Interceptors(InterceptorLogging.class)
 public class StockRestService {
 	
+	/**
+	 * @return StockService methods
+	 */
 	@Inject
 	StockInterface service;
 	
+	/**
+	 * POST method
+	 * Client sends AAPL Stock and we return it 
+	 * 
+	 * @param stock Stock
+	 * @return Response DTO
+	 */
 	@POST
 	@Path("/previous")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -34,18 +44,22 @@ public class StockRestService {
 		
 		try 
 		{
-			Response dto = factory.getResponse200(service.saveStock(stock));
+			// Call StockService.saveStock to try and retain the new AAPL Stock info
+			boolean result = service.saveStock(stock);
 			
-			return dto;
+			// Call and return the factory to assemble a dynamic code 200 response
+			return factory.getResponse200(result);
 		}
 		// When POST failed and stock was not saved.
 		catch(PostException e)
 		{
+			// Call and return the factory to assemble a responsive code 400 response
 			return factory.getResponse400(e);
 		} 
 		// Catching DB exceptions
 		catch(Exception e)
 		{
+			// Call and return the factory to assemble a dynamic code 500 response
 			return factory.getResponse500(e);
 		}
 	}

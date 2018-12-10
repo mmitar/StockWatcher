@@ -19,8 +19,7 @@ import util.UserNotFoundException;
 public class UserService implements UserInterface {
 	
 	/**
-	 * Injects the User DAO
-	 * @return UserDataService
+	 * @return UserDataService methods
 	 */
 	@Inject
 	DataAccessInterface<User> dao;

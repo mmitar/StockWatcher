@@ -50,14 +50,14 @@ public class StockController implements Serializable
         
         try 
         {
-        	//if a stock is found 
+        	// Try to return an instance of the stock being searched for
 			stock = this.service.getStock(symbol);
         }
-     // catch if no stock has  been found and redirect them back to the same page
+        // catch if no stock has  been found and redirect them back to the same page
         catch(StockNotFoundException e)
         {
         	this.error = "No stock data found using: "+symbol;
-			this.redirect = "HomePage.xhtml"; // return view
+			this.redirect = "HomePage.xhtml";
 		}
         
 		//Forwards the User ManagedBean

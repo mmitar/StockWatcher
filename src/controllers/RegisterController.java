@@ -1,13 +1,12 @@
 package controllers;
 
+import javax.ejb.EJB;
 import javax.faces.context.FacesContext;
-import javax.inject.Inject;
+import javax.faces.view.ViewScoped;
+import javax.inject.Named;
 import javax.interceptor.Interceptors;
 
 import java.io.Serializable;
-
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
 
 import beans.User;
 import business.UserInterface;
@@ -20,7 +19,7 @@ import util.UserFoundException;
  * @author Matthew & Joey
  *
  */
-@ManagedBean
+@Named
 @ViewScoped
 @Interceptors(InterceptorLogging.class)
 public class RegisterController implements Serializable
@@ -35,7 +34,7 @@ public class RegisterController implements Serializable
 	 * @param user: User
 	 * @return view: String
 	 */
-	@Inject
+	@EJB
 	private UserInterface service;
 	
 	/**

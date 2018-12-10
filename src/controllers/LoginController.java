@@ -2,10 +2,11 @@ package controllers;
 
 import java.io.Serializable;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.ejb.EJB;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.interceptor.Interceptors;
 
 import beans.User;
@@ -19,7 +20,7 @@ import util.UserNotFoundException;
  * @author Matthew & Joey
  *
  */
-@ManagedBean
+@Named
 @ViewScoped
 @Interceptors(InterceptorLogging.class)
 public class LoginController implements Serializable
@@ -34,7 +35,7 @@ public class LoginController implements Serializable
 	 * @param user
 	 * @return
 	 */	
-	@Inject
+	@EJB
 	private UserInterface service;
 	
 	/**

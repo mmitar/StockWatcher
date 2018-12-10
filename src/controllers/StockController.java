@@ -2,10 +2,10 @@ package controllers;
 
 import java.io.Serializable;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.ejb.EJB;
 import javax.faces.context.FacesContext;
-import javax.inject.Inject;
+import javax.faces.view.ViewScoped;
+import javax.inject.Named;
 import javax.interceptor.Interceptors;
 import javax.servlet.http.HttpServletRequest;
 
@@ -19,7 +19,7 @@ import util.StockNotFoundException;
  * @author Matthew Mitar & Joey Alexander
  *
  */
-@ManagedBean
+@Named
 @ViewScoped
 @Interceptors(InterceptorLogging.class)
 public class StockController implements Serializable
@@ -31,7 +31,7 @@ public class StockController implements Serializable
 	/**
 	 * @return StockService methods
 	 */
-	@Inject
+	@EJB
 	private StockInterface service;
 	
 	/**

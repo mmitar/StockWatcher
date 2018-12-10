@@ -33,29 +33,11 @@ public class InterceptorLogging implements Serializable
 		// Info level log that declares the invoked method
 		logger.info("Invoked " + ctx.getTarget().getClass() + "." + ctx.getMethod().getName() + "();");
 		
-		// Try to proceed the invoked method
-		try
-		{
-			// Continue the system's method call
-			return ctx.proceed();
-		} 
-		// If a database exception was thrown continue here
-		catch(DatabaseException e)
-		{
-			// Log the exception that was thrown.
-			logger.warn("Database Thrown: " + e.getClass() + " ## Reconnect!! ");
-			
-			// Ignore trying to redirect and let the system continue exception procedure.
-			return null;
-		}
-		// If an Exception was intercepted, continue here
-		catch(Exception e)
-		{
-			// Log the exception that was thrown.
-			logger.warn("Exception Thrown: " + e.getClass() + ";");
-			
-			// Proceed the systems lifecyles to handle the checked Exception being thrown.
-			return ctx.proceed();
-		}
+		// Continue the system's method call
+		Object result = ctx.proceed();
+		
+		logger.info("Exiting " + ctx.getTarget().getClass() + "." + ctx.getMethod().getName() + "();");
+		
+		return result;
 	}
 }

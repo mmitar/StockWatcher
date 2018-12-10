@@ -6,8 +6,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * @author speed
- *
+ * implements parent Response and extends ReponseModel
  */
 @Local(Response.class)
 @XmlRootElement(name="Response")

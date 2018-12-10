@@ -18,34 +18,56 @@ import util.UserNotFoundException;
 @Interceptors(InterceptorLogging.class)
 public class UserService implements UserInterface {
 	
+	/**
+	 * Injects the User DAO
+	 * @return UserDataService
+	 */
 	@Inject
 	DataAccessInterface<User> dao;
 	
-	
-	@Override	
+	/**
+	 * Function that enforces a validated user 
+	 * 
+	 * @param user User
+	 * @throws UserNotFoundException
+	 * @return User
+	 */
+	@Override
 	public User findBy(User user) throws UserNotFoundException
 	{ 
-		// Step 1: Get and return the user that logged in
+		// Get and return the user that logged in calling DAO
         user = dao.findBy(user);
           
+        // check if the user is not null 
         if(user != null)
         {
-        	
+        	// return validated User
         	return user;
         }
+        // If user is null throw exception
         else
         {
         	throw new UserNotFoundException();
         }
     }
 
+	/**
+	 * Function that enforces that a User was successfully created
+	 * 
+	 * @param user User
+	 * @throws UserFoundException
+	 * @return boolean
+	 */
 	@Override
 	public boolean create(User user) throws UserFoundException
 	{	
+		// check if the user already exists in the DB
         if(dao.findBy(user) == null)
         {
+        	// If the user does not already exist, create a new user
         	return dao.create(user);
         }
+        // If user exists throw exception
         else
         {
             throw new UserFoundException();

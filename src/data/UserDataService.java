@@ -23,9 +23,7 @@ import util.InterceptorLogging;
 public class UserDataService implements DataAccessInterface<User> {
 	
 	/**
-	 * Creating connection to mySQL db 'swatcherdb'
-	 * also using my username and password 
-	 * 
+	 * Connection params to declare a connection with swatcherdb
 	 */	
 	Connection conn = null;
 	String url = "jdbc:mysql://localhost:3306/swatcherdb";
@@ -48,7 +46,8 @@ public class UserDataService implements DataAccessInterface<User> {
 		
 		try
 		{
-			conn = DriverManager.getConnection(url, username, password);//creating connection
+			//creating connection
+			conn = DriverManager.getConnection(url, username, password);
 			//SELECT sql statement to match user input
 			String sql = String.format("SELECT * FROM `user` WHERE `USERNAME` = '%s' AND `PASSWORD` = '%s'", user.getUsername(),user.getPassword());
 			//connecting SQL statement to db
@@ -59,12 +58,13 @@ public class UserDataService implements DataAccessInterface<User> {
 			//if user is found
 			if(rs.next())
 			{
-				user = User.getResultSet(rs);//return user if found
+				//return user if found
+				user = User.getResultSet(rs);
 			} 
 			else 
 			{
-				
-				user = null;//if no user is found return null
+				//if no user is found return null
+				user = null;
 			}
 			//close connection to prevent garabe build up
 			rs.close();
@@ -169,4 +169,5 @@ public class UserDataService implements DataAccessInterface<User> {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
 }

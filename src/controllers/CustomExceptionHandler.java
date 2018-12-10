@@ -17,6 +17,9 @@ import javax.interceptor.Interceptors;
 
 import util.InterceptorLogging;
 
+/**
+ * Redirects the user to the Error Page and prints the Error to it.
+ */
 @Interceptors(InterceptorLogging.class)
 public class CustomExceptionHandler extends ExceptionHandlerWrapper implements Serializable
 {

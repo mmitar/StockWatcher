@@ -27,6 +27,9 @@ import util.InterceptorLogging;
 @Interceptors(InterceptorLogging.class)
 public class StockDataService implements StockDataInterface<Stock> {
 
+	/**
+	 * Connection params to declare a connection with swatcherdb
+	 */	
 	private static Connection conn = null;
 	private final String url = "jdbc:mysql://localhost:3306/swatcherdb";
 	private final String username = "root";
@@ -54,8 +57,10 @@ public class StockDataService implements StockDataInterface<Stock> {
 	public Stock findBy(String symbol) {
 		
 		Stock stock = null;
+		
 		try {
-			conn = DriverManager.getConnection(url, username, password);// creating connection
+			// creating connection
+			conn = DriverManager.getConnection(url, username, password);
 			//SELECT FROM SQL statement
 			String sql = String.format("SELECT * FROM `stock` WHERE `SYMBOL` = '%s' LIMIT 1", symbol);
 			//creating connection with statement
@@ -111,7 +116,8 @@ public class StockDataService implements StockDataInterface<Stock> {
 		boolean result = false;
 		
 		try {
-			conn = DriverManager.getConnection(url, username, password);//conection made
+			//conection made
+			conn = DriverManager.getConnection(url, username, password);
 			//INSERT sql statement
 			String sql = "INSERT INTO `stock` ("+Stock.getParamSet()+") VALUES ("+Stock.getValueSet(stock)+")";
 			//create connection for statement
@@ -161,20 +167,24 @@ public class StockDataService implements StockDataInterface<Stock> {
 		boolean result = false;
 		
 		try {
+			//Create a connection
 			conn = DriverManager.getConnection(url, username, password);
-			
+			// UDPATE query that updates an existing Stock data aset
 			String sql = "UPDATE `stock` SET "+Stock.getUpdateSetBySymbol(stock);
-			
+			// execute the statement
 			Statement stmt = conn.createStatement();
 			int rs = stmt.executeUpdate(sql);
 			
+			// verify the changes were made.
 			if(rs > 0) 
 			{
 				result = true; 
 			}
 			
+			// Close the connection
 			stmt.close();
 		}
+		// Throw a database connection exception
 		catch(SQLException e) 
 		{
 			e.printStackTrace();
@@ -189,6 +199,7 @@ public class StockDataService implements StockDataInterface<Stock> {
 				{
 					conn.close();
 				} 
+				// Throw a database Exception Connection
 				catch (SQLException e)
 				{
 					e.printStackTrace();			
@@ -196,6 +207,7 @@ public class StockDataService implements StockDataInterface<Stock> {
 				}
 			}
 		}
+		// Return the results from the update
 		return result;
 	}
 

@@ -2,6 +2,10 @@ package util;
 
 import javax.ejb.ApplicationException;
 
+/**
+ * Enforces Data Logic.
+ * Useful for errors regarding Database issues.
+ */
 @ApplicationException(rollback=true)
 public class DatabaseException extends RuntimeException
 {

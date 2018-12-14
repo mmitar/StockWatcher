@@ -160,7 +160,7 @@ public class UserDataService implements DataAccessInterface<User> {
     }
 	
 	/**
-	 * findIfExists method
+	 * READ method
 	 * Checks database if user name already exists to avoid duplicate user name during registration
 	 * 
 	 * @param user User
@@ -168,14 +168,15 @@ public class UserDataService implements DataAccessInterface<User> {
 	 * @throws DatabaseException
 	 */	
 	@Override
-public boolean findIfExists(User user) {
+	public boolean findIfExists(User user) 
+	{
 		boolean result = false;
 		try
 		{
 			//creating connection
 			conn = DriverManager.getConnection(url, username, password);
 			//SELECT sql statement to match user input
-			String sql = String.format("SELECT * FROM `user` WHERE BINARY `USERNAME` = '%s'", user.getUsername());
+			String sql = String.format("SELECT * FROM `user` WHERE `USERNAME` = '%s'", user.getUsername());
 			//connecting SQL statement to db
 			Statement stmt = conn.createStatement();
 			//executing the result of the SQL statetment

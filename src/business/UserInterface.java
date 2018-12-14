@@ -26,13 +26,4 @@ public interface UserInterface {
 	 * @return boolean
 	 */
 	public boolean create(User user) throws UserFoundException;
-	
-	/**
-	 * Function that checks if the user name is already taken to avoid duplicate user names
-	 * 
-	 * @param user User
-	 * @throws UserFoundException
-	 * @return boolean
-	 */
-	public boolean findIfExists(User user) throws  UserFoundException;
 }

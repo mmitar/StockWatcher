@@ -60,7 +60,7 @@ public class UserService implements UserInterface {
 	@Override
 	public boolean create(User user) throws UserFoundException
 	{	
-		// check if the user already exists in the DB
+		// check if the user already exists in the DB by username
         if(dao.findIfExists(user) == false)
         {
         	// If the user does not already exist, create a new user
@@ -71,12 +71,6 @@ public class UserService implements UserInterface {
         {
             throw new UserFoundException();
         }
-	}
-
-	@Override
-	public boolean findIfExists(User user) throws UserFoundException {
-		// TODO Auto-generated method stub
-		return false;
 	}
 }
 

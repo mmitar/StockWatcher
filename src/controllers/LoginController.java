@@ -11,6 +11,7 @@ import javax.interceptor.Interceptors;
 
 import beans.User;
 import business.UserInterface;
+import util.ILogger;
 import util.InterceptorLogging;
 import util.UserNotFoundException;
 
@@ -35,6 +36,7 @@ public class LoginController implements Serializable
 	 * @param user
 	 * @return
 	 */	
+	
 	@EJB
 	private UserInterface service;
 	

@@ -24,6 +24,14 @@ public interface DataAccessInterface <T>
 	public boolean create(T t);
 	
 	/**
+	 * findIfExcists method
+	 * 	used for checking duplicate user name during registration
+	 * @param t T
+	 * @return boolean
+	 */	
+	public boolean findIfExists(T t);
+	
+	/**
 	 * UPDATE method
 	 * 
 	 * @param t T

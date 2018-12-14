@@ -51,7 +51,7 @@ public class UserDataService implements DataAccessInterface<User> {
 			//creating connection
 			conn = DriverManager.getConnection(url, username, password);
 			//SELECT sql statement to match user input
-			String sql = String.format("SELECT * FROM `user` WHERE `USERNAME` = '%s' AND `PASSWORD` = '%s'", user.getUsername(),user.getPassword());
+			String sql = String.format("SELECT * FROM `user` WHERE BINARY `USERNAME` = '%s' AND BINARY `PASSWORD` = '%s'", user.getUsername(),user.getPassword());
 			//connecting SQL statement to db
 			Statement stmt = conn.createStatement();
 			//executing the result of the SQL statetment
@@ -158,6 +158,72 @@ public class UserDataService implements DataAccessInterface<User> {
 		// return result if its false or true
 		return result;
     }
+	
+	/**
+	 * findIfExists method
+	 * Checks database if user name already exists to avoid duplicate user name during registration
+	 * 
+	 * @param user User
+	 * @return boolean
+	 * @throws DatabaseException
+	 */	
+	@Override
+public boolean findIfExists(User user) {
+		boolean result = false;
+		try
+		{
+			//creating connection
+			conn = DriverManager.getConnection(url, username, password);
+			//SELECT sql statement to match user input
+			String sql = String.format("SELECT * FROM `user` WHERE BINARY `USERNAME` = '%s'", user.getUsername());
+			//connecting SQL statement to db
+			Statement stmt = conn.createStatement();
+			//executing the result of the SQL statetment
+			ResultSet rs = stmt.executeQuery(sql);
+		
+			//if username is found
+			if(rs.next())
+			{
+				//return user if found
+				result = true;
+			} 
+			else 
+			{
+				//if no user is found return false
+				result = false;
+			}
+			// close connection to prevent garbage build up
+			rs.close();
+			stmt.close();
+		}
+		// If there was a SQL or DB Connection Error. Throw DB Exception
+		catch(SQLException e)        
+    	{
+        	e.printStackTrace();
+        	throw new DatabaseException(e);
+        }
+		// Execute after try-catch block to cleanup the connection
+        finally
+        {
+        	// If there was a connection instantiated in some form.
+        	if(conn != null)
+        	{	
+        		try
+        		{
+        			// if connection was made now close it
+        			conn.close();
+        		}
+        		// If there was an issue closing the Connection
+        		catch(SQLException e)
+        		{
+        			e.printStackTrace();
+        			throw new DatabaseException(e);
+        		}       		
+        	}       	
+        }
+		//return user if its null or has data
+		return result;
+    }	
 		
 	/**
 	 * Inactive.
